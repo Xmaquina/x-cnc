@@ -42,7 +42,7 @@ printf("Allocated motor\n");
     if(m == NULL){
 printf("Vai tomar no cu\n"); 
     }
-    m->motor_axis = motor;
+    m->axis = motor;
 printf("Onde esta o erro? aqui\n"); 
     FILE *fp;
     if(motor_file_exists(motor)){
@@ -52,9 +52,9 @@ printf("Onde esta o erro? aqui\n");
     }
     char buffer[255];
     double angle = 0;
-    fscanf(fp, "%s=%lf", buffer, &angle);
+    fscanf(fp, "%s = %lf", buffer, &angle);
 printf("O que foi lido do arquivo:\n");
-printf("%s=%f\n", buffer, angle);
+printf("%s=%lf\n", buffer, angle);
     if(strcmp(buffer, "angle") == 0){
         m->step = angle;
     }
@@ -65,4 +65,7 @@ printf("%s=%f\n", buffer, angle);
 
 }
 
-
+int move_motor(motor *m){
+    pinMode(17, OUTPUT);
+    
+}

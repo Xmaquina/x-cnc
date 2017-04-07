@@ -1,20 +1,26 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-enum motor_axis{
-    X_AXIS,
-    Y_AXIS,
-    Z_AXIS
+#define X_AXIS 1
+#define Y_AXIS 2
+#define Z_AXIS 3
+
+enum motor_axis_{
+    x_axis = X_AXIS,
+    y_axis = Y_AXIS,
+    z_asix = Z_AXIS
 };
+
+typedef enum motor_axis_ motor_axis;
 
 struct motor_{
     double step;
-    int motor_axis;
-
+    motor_axis axis;
+ 
 };
 
 typedef struct motor_ motor; 
 
 int read_conf(motor * m, int motor);
-
+int move_motor(motor *m);
 #endif
