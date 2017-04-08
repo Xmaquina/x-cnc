@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<wiringPi.h>
 
 int alloc_motor(motor **m){
     *m = (motor *)malloc(sizeof(motor));
@@ -11,16 +12,38 @@ printf("It cannot allocate motor");
     }
     return 0;   
 }
+char * type_axis(motor *m){
+    if(m->axis == X_AXIS){
+        return CX_AXIS;
+    }else if(m->axis == Y_AXIS){
+        return CY_AXIS;
+    }else if(m->axis == Z_AXIS){
+        return CZ_AXIS;
+    }
+    return "";
+}
+
+char * type_axis(motor_axis m){
+    if(m == X_AXIS){
+        return CX_AXIS;
+    }else if(m == Y_AXIS){
+        return CY_AXIS;
+    }else if(m == Z_AXIS){
+        return CZ_AXIS;
+    }
+    return "";
+}
+
 char * motor_file_name(int motor){
 printf("Por acaso o erro esta na funcao motor_file_name\n");
     char * f = "./conf/stepper-motor-";
     char r[120];
     char n[2];
-    n[0] = motor + 60;
+    sprintf(n,"%d",motor); 
 printf("Por acaso o erro esta na funcao motor_file_name linha 16-18\n");
     strcat(r,f);
 printf("Por acaso o erro esta na funcao motor_file_name linha 20\n");
-    strcat(r, n);
+    strcat(r, type_axis(motor);
 printf("Por acaso o erro esta na funcao motor_file_name linha 22\n");
 printf("Motor file name: %s\n", r);
     return r;
@@ -64,6 +87,8 @@ printf("%s=%lf\n", buffer, angle);
    return 0; 
 
 }
+
+
 
 int move_motor(motor *m){
     pinMode(17, OUTPUT);
