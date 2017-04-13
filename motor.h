@@ -28,5 +28,6 @@ typedef struct motor_ motor;
 int read_conf(motor * m, int motor);
 int move_motor(motor *m);
 char * type_axis(motor *m);
+char * type_axis_c(motor_axis m);
 
 #endif
