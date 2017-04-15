@@ -9,7 +9,8 @@
 int alloc_motor(motor **m){
     *m = (motor *)malloc(sizeof(motor));
     if(*m == NULL){
-printf("It cannot allocate motor");
+        fprintf(stderr, "It cannot alloccate motor structure because %sn",
+                strerror(errno)); 
         return 1;
     }
     return 0;   
@@ -58,37 +59,32 @@ int motor_file_exists(motor *m){
     }
     if ((file = fopen(fname, "r"))){
         fclose(file);
-//printf("Retornou 1\n"); 
         return 1;
     }
     return 0;
 }
 
+int print_motor(motor *m){
+    printf("Angle: %lf\n", m->step);
+    return 1;
+}
+
 int read_conf(motor *m, int motor){
-//printf("Starting read conf\n");
-    if(alloc_motor(&m)){ exit(1); };
-//printf("Allocated motor\n");
-    if(m == NULL){
-//printf("Vai tomar no cu\n"); 
-    }
+    if(m == NULL){ exit(EXIT_FAILURE); };
     m->axis = motor;
-//printf("Onde esta o erro? aqui\n"); 
     FILE *fp;
     if(motor_file_exists(m)){
         fp = fopen(motor_file_name(m), "r");
     }else{
-//printf("Retorno errado\n"); 
         fp = fopen("conf/stepper-motor", "r");
     }
     char buffer[255];
     double angle = 0;
     fscanf(fp, "%s = %lf", buffer, &angle);
-printf("O que foi lido do arquivo:\n");
-printf("%s=%lf\n", buffer, angle);
     if(strcmp(buffer, "angle") == 0){
         m->step = angle;
     }
-
+    print_motor(m);
     fclose(fp); 
     
    return 0; 

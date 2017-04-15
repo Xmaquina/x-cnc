@@ -25,6 +25,7 @@ struct motor_{
 
 typedef struct motor_ motor; 
 
+int alloc_motor(motor **m);
 int read_conf(motor * m, int motor);
 int move_motor(motor *m);
 char * type_axis(motor *m);
