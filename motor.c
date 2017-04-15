@@ -38,25 +38,15 @@ char * type_axis_c(motor_axis m){
 }
 
 char * motor_file_name(motor *m){
-//printf("Por acaso o erro esta na funcao motor_file_name\n");
     char * f = "conf/stepper-motor-";
     char * r = malloc(sizeof(char) * 120);
-//printf("Por acaso o erro esta na funcao motor_file_name linha 16-18\n");
     strcpy(r,f);
-//printf("Por acaso o erro esta na funcao motor_file_name linha 20\n");
     strcat(r, type_axis(m));
-//printf("Por acaso o erro esta na funcao motor_file_name linha 22\n");
-//printf("Motor file name: %s\n", r);
     return r;
 }
 int motor_file_exists(motor *m){
     FILE *file;
     char *fname = motor_file_name(m);
-//printf("Motor file name 2: %s\n", fname);
-    file = fopen(fname, "r");
-    if(file == NULL){
-        //printf("Oh dear, something went wrong with read()! %s\n", strerror(errno));
-    }
     if ((file = fopen(fname, "r"))){
         fclose(file);
         return 1;
@@ -77,6 +67,11 @@ int read_conf(motor *m, int motor){
         fp = fopen(motor_file_name(m), "r");
     }else{
         fp = fopen("conf/stepper-motor", "r");
+    }
+    if(fp == NULL){
+        fprintf (stderr, "Couldn't open file conf/stepper-motor; %s\n",
+                 strerror (errno));
+        exit (EXIT_FAILURE);
     }
     char buffer[255];
     double angle = 0;
