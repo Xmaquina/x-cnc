@@ -16,7 +16,7 @@ all = $(TARGET)
 $(TARGET): main.o $(MOTOR)
 	$(CC) $(CFLAGS) $(WIRINGFLAG) -o $@ $^
 
-$(MOTOR) : motor.c motor.h
+$(MOTOR) : motor.c motor.h xcncmacros.h
 	$(CC) $(CFLAGS) $(WIRINGFLAG) -c -o $@ $<
 
 main.o : main.c $(MOTOR)

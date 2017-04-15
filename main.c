@@ -5,12 +5,13 @@
 
 
 int conversao(double distance){
-    
+    return 0;    
 }
 
 int main(){
-    motor *m;
+    motor *m = NULL;
     read_conf(m, X_AXIS);
+    read_conf(m, Y_AXIS);
     printf("Testando");
     return 0;
 }
