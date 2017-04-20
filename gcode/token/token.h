@@ -10,6 +10,6 @@ struct token_{
 
 typedef struct token_ token; 
 
-token * get_token(const char *line, const char word);
+token * get_token(const char *line, const char *word);
 
 #endif

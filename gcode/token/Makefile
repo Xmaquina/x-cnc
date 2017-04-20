@@ -5,14 +5,14 @@ UNAME       = $(shell uname)
 CC          = gcc
 CFLAGS      = -g -Wall -std=c99
 
-TARGET   = token
+TARGET   = prog
 MAIN     = main.c
 TOKEN    = token.o 
 
 all = $(TARGET)
 
 
-$(TARGET): main.o $(MOTOR) $(GCODE)
+$(TARGET): main.o $(TOKEN) 
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(TOKEN) : token.c token.h 
