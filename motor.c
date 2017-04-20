@@ -3,7 +3,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<wiringPi.h>
+#ifdef RASP_OS 
+    #include<wiringPi.h>
+#endif
 #include <errno.h>
 
 int alloc_motor(motor **m){

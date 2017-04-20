@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <regex.h>
 
 gc_list * create_list(){
     gc_list *gl = (gc_list *) malloc(sizeof(gc_list));
@@ -39,8 +40,19 @@ int add(gc_list *gl, gcommand *gc){
 }
 
 int get_gcode(gcommand *g){
+    regex_t regex;
+    int reti;
+    reti = regcomp(&regex,"(N[0-9]+) (G[0-9]+)", REG_EXTENDED);
+    reti = regexec(&regex,g->line, 0, NULL, REG_EXTENDED);
+printf("Reti :%d\n",reti);
+    if(reti == 0){
+        printf("Match");
+    }
+    regfree(&regex);
+printf("Entrou aqui\n");
     char p[3];
     strncpy(p, g->line,1); 
+printf("O que foi copiado %s\n", p);
     if(strcmp(p,"N") == 0){
         strncpy(p, g->line+4,3); 
         printf("code %s\n", p);

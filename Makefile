@@ -1,10 +1,14 @@
 #
 #   Makefile
 #
-CFLAGS= -g -Wall -std=c99
-WIRINGFLAG = -l wiringPi
-
-CC=gcc
+WIRINGFLAG  = -l wiringPi
+UNAME       = $(shell uname)
+CC          = gcc
+ifeq ($(UNAME), Darwin)
+	CFLAGS=-g -Wall -std=c99
+else
+	CFLAGS=-g -Wall -std=c99 $(WIRINGFLAG)
+endif
 
 TARGET   = x-cnc
 MAIN     = main.c
@@ -15,16 +19,16 @@ all = $(TARGET)
 
 
 $(TARGET): main.o $(MOTOR) $(GCODE)
-	$(CC) $(CFLAGS) $(WIRINGFLAG) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 $(MOTOR) : motor.c motor.h xcncmacros.h
-	$(CC) $(CFLAGS) $(WIRINGFLAG) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(GCODE) : gcode/gcode.c gcode/gcode.h xcncmacros.h
-	$(CC) $(CFLAGS) $(WIRINGFLAG) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 main.o : main.c $(MOTOR)
-	$(CC) $(CFLAGS) $(WIRINGFLAG) -c -o $@ $<
+	$(CC) $(CFLAGS)  -c -o $@ $<
 
 clean:
 	rm *.o    
