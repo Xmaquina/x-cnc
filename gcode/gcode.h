@@ -26,10 +26,10 @@ struct gc_list_{
 
 typedef struct gc_list_ gc_list;
 
-int create_list(gc_list *gl);
+gc_list * create_list();
 
-int add(gc_list, *gl, gcommand *gc);
+int add(gc_list *gl, gcommand *gc);
 
 int get_gcode(gcommand *g);
-int read_gcodefile(char *file_name,gcommand *gcmds); 
+int read_gcodefile(char *file_name,gc_list *gl); 
 #endif
