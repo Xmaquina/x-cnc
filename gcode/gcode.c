@@ -1,9 +1,11 @@
 #include "gcode.h"
+#include "token/token.h"
 #include "../xcncmacros.h"
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <regex.h>
+
 
 gc_list * create_list(){
     gc_list *gl = (gc_list *) malloc(sizeof(gc_list));
@@ -75,15 +77,20 @@ printf("Reti: %d %d\n",reti, REG_NOMATCH);
 }
 
 int get_gcode(gcommand *g){
-    sem_nome(g); 
-//printf("Entrou aqui\n");
-    char p[3];
-    strncpy(p, g->line,1); 
-//printf("O que foi copiado %s\n", p);
-    if(strcmp(p,"N") == 0){
-        strncpy(p, g->line+4,3); 
-        printf("code %s\n", p);
-    }  
+    tk_list *tl = create_list_tk();
+    if(tl == NULL) exit(EXIT_FAILURE);  
+    const char *gcodes[2] = {G01,G00};
+    for(int i = 0; i < NR_GCODES; i++){
+        get_token(g->line,gcodes[i], tl);
+//printf("Size tk %d\n", tl->size);
+        if(tl->size > 0){
+            int len = strlen(gcodes[i]);
+            g->gcode = (char *)malloc(sizeof(char) * len);
+            strcpy(g->gcode, gcodes[i]);
+//printf("Gcode in get_code %s\n", g->gcode);
+            break;
+        } 
+    }
     return 1;    
 }
 

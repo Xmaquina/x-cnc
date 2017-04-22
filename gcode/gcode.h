@@ -1,7 +1,7 @@
 #ifndef GCODE_H
 #define GCODE_H
 
-#define G01 "GO1"
+#define G01 "G01"
 #define G00 "G00"
 #define NR_GCODES 2
 struct gcommand_{

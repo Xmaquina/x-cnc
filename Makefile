@@ -14,17 +14,21 @@ TARGET   = x-cnc
 MAIN     = main.c
 MOTOR    = motor.o 
 GCODE    = gcode.o
+TOKEN    = token.o
 
 all = $(TARGET)
 
 
-$(TARGET): main.o $(MOTOR) $(GCODE)
+$(TARGET): main.o $(MOTOR) $(GCODE) $(TOKEN)
 	$(CC) $(CFLAGS) -o $@ $^
 
 $(MOTOR) : motor.c motor.h xcncmacros.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(GCODE) : gcode/gcode.c gcode/gcode.h xcncmacros.h
+$(GCODE) : gcode/gcode.c gcode/gcode.h xcncmacros.h $(TOKEN) 
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(TOKEN) : gcode/token/token.c gcode/token/token.h xcncmacros.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 main.o : main.c $(MOTOR)

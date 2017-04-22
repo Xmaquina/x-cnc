@@ -25,6 +25,7 @@ int main(int argv, char *argc[]){
     for(gc_node *it = gl->head; it != NULL; it = it->next){
 //        printf("Line %s", it->elem->line);
         get_gcode(it->elem);
+        printf("Gcode %s\n", it->elem->gcode);
     }
     motor *m;
     alloc_motor(&m);
