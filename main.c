@@ -23,7 +23,7 @@ int main(int argv, char *argc[]){
     }
     read_gcodefile(argc[1], gl);
     for(gc_node *it = gl->head; it != NULL; it = it->next){
-        printf("Line %s", it->elem->line);
+//        printf("Line %s", it->elem->line);
         get_gcode(it->elem);
     }
     motor *m;

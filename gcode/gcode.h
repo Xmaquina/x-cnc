@@ -2,7 +2,8 @@
 #define GCODE_H
 
 #define G01 "GO1"
-
+#define G00 "G00"
+#define NR_GCODES 2
 struct gcommand_{
     char * line;
     char * gcode;

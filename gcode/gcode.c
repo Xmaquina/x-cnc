@@ -39,20 +39,47 @@ int add(gc_list *gl, gcommand *gc){
     return 0;
 }
 
-int get_gcode(gcommand *g){
+int sem_nome(gcommand *g){
     regex_t regex;
     int reti;
-    reti = regcomp(&regex,"(N[0-9]+) (G[0-9]+)", REG_EXTENDED);
-    reti = regexec(&regex,g->line, 0, NULL, REG_EXTENDED);
-printf("Reti :%d\n",reti);
-    if(reti == 0){
-        printf("Match");
+    size_t matches = 6;
+    regmatch_t groups[6];
+    const char *gcodes[2] = {G01,G00};
+    for(int i = 0; i < NR_GCODES; i++){
+        char c[12] = ".*(G01).*";
+        char b[10] = ".*(";
+        strcat(b,gcodes[i]);
+        strcat(b,").*\0");
+        if(strcmp(b,c) == 0){
+printf("Iguais\n");
+        }else if(strcmp(b,c) < 0){
+printf("b Menor\n");
+        }else{
+printf("b Maior\n");
+        }   
+printf("Regex: b: %s c: %s\n",b,c);
+        reti = regcomp(&regex,b, REG_EXTENDED);
+printf("Reti: %d\n",reti);
+        reti = regexec(&regex,g->line, matches, groups, REG_EXTENDED);
+printf("Reti: %d %d\n",reti, REG_NOMATCH);
+        if(reti == 0){
+            printf("Match\n");
+            printf("Line %s\n", g->line);
+            for(int i = 0; i < matches; i++){
+                printf("b: %d e: %d\n", groups[i].rm_so, groups[i].rm_eo);
+            }
+        }
+        regfree(&regex);
     }
-    regfree(&regex);
-printf("Entrou aqui\n");
+    return 1;
+}
+
+int get_gcode(gcommand *g){
+    sem_nome(g); 
+//printf("Entrou aqui\n");
     char p[3];
     strncpy(p, g->line,1); 
-printf("O que foi copiado %s\n", p);
+//printf("O que foi copiado %s\n", p);
     if(strcmp(p,"N") == 0){
         strncpy(p, g->line+4,3); 
         printf("code %s\n", p);
