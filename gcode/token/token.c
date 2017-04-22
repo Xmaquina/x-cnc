@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <ctype.h>
 #include "../../xcncmacros.h"
 
 tk_list * create_list_tk(){
@@ -96,4 +97,26 @@ int get_token(const char *line, const char *word, tk_list *tl){
 }
 
 
+token * get_digits_after_token(const char *line, const char *word ){
+    tk_list *tl = create_list_tk();
+    get_token(line, word, tl);
+	int len = strlen(line);
+    if(tl->size == 1){
+        int i = 0;
+        for(i = tl->head->elem->end + 1; i < len; i++){
+            if(!isdigit(line[i])){
+                break;
+            }
+        }
+//printf("len line %d\n", len);
+        token *tk = malloc(sizeof(token));
+        if(tk == NULL) return NULL;
+        tk->begin = tl->head->elem->end + 1;
+        tk->end = i - 1;
+//printf("Value of %d\n", i);
+        free_tk_list(tl);
+        return tk; 
+    }
+	return NULL;
 
+}

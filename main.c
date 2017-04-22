@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "motor.h"
 #include "gcode/gcode.h"
+#include <string.h>
 
 
 
@@ -26,6 +27,11 @@ int main(int argv, char *argc[]){
 //        printf("Line %s", it->elem->line);
         get_gcode(it->elem);
         printf("Gcode %s\n", it->elem->gcode);
+        if(strcmp(it->elem->gcode, G01) == 0){
+            printf("G01 code\n");
+            set_G01_coordenates(it->elem);
+            printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
+        }
     }
     motor *m;
     alloc_motor(&m);

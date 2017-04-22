@@ -4,9 +4,14 @@
 #define G01 "G01"
 #define G00 "G00"
 #define NR_GCODES 2
+
 struct gcommand_{
     char * line;
     char * gcode;
+    double x;
+    double y; 
+    double z;
+    double f;
     
 };
 
@@ -32,5 +37,6 @@ gc_list * create_list();
 int add(gc_list *gl, gcommand *gc);
 
 int get_gcode(gcommand *g);
+int set_G01_coordenates(gcommand *g);
 int read_gcodefile(char *file_name,gc_list *gl); 
 #endif

@@ -41,6 +41,34 @@ int add(gc_list *gl, gcommand *gc){
     return 0;
 }
 
+double get_digits_coordenate(gcommand *g, char *coord){
+    token *tk = get_digits_after_token(g->line, coord);
+    if(tk != NULL){
+        //printf("Begin %d End %d\n", tk->begin, tk->end);
+        char c[3];
+        memset(c,'\0', 3);    
+        strncpy(c,g->line+tk->begin, tk->end - tk->begin + 1);
+        double r = (double)atoi(c);
+        return r;
+        //printf("valor convertido: %s %d\n",c, atoi(c));
+        //printf("valor convertido: %s\n",c);
+    }
+    return 0;
+}
+
+int set_G01_coordenates(gcommand *g){
+    if(strcmp(g->gcode, G01) != 0){
+        return 1;
+    }
+    
+    g->x = get_digits_coordenate(g, "X");
+    g->y = get_digits_coordenate(g, "Y");
+    g->z = get_digits_coordenate(g, "Z");
+    g->f = get_digits_coordenate(g, "F");
+    
+    return 0;
+}
+
 int set_gcommand_gcode(gcommand *g, const char * code){
     int len = strlen(code);
     g->gcode = (char *)malloc(sizeof(char) * len);
