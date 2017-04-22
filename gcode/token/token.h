@@ -26,9 +26,8 @@ struct tk_list_{
 typedef struct tk_list_ tk_list;
 
 tk_list * create_list_tk();
-
 int add_tk(tk_list *tl, token *tk);
 int add_pair(tk_list *tl, int begin, int end);
 int get_token(const char *line, const char *word, tk_list *tl);
-
+int free_tk_list(tk_list *tl);
 #endif

@@ -41,37 +41,12 @@ int add(gc_list *gl, gcommand *gc){
     return 0;
 }
 
-int sem_nome(gcommand *g){
-    regex_t regex;
-    int reti;
-    size_t matches = 6;
-    regmatch_t groups[6];
-    const char *gcodes[2] = {G01,G00};
-    for(int i = 0; i < NR_GCODES; i++){
-        char c[12] = ".*(G01).*";
-        char b[10] = ".*(";
-        strcat(b,gcodes[i]);
-        strcat(b,").*\0");
-        if(strcmp(b,c) == 0){
-printf("Iguais\n");
-        }else if(strcmp(b,c) < 0){
-printf("b Menor\n");
-        }else{
-printf("b Maior\n");
-        }   
-printf("Regex: b: %s c: %s\n",b,c);
-        reti = regcomp(&regex,b, REG_EXTENDED);
-printf("Reti: %d\n",reti);
-        reti = regexec(&regex,g->line, matches, groups, REG_EXTENDED);
-printf("Reti: %d %d\n",reti, REG_NOMATCH);
-        if(reti == 0){
-            printf("Match\n");
-            printf("Line %s\n", g->line);
-            for(int i = 0; i < matches; i++){
-                printf("b: %d e: %d\n", groups[i].rm_so, groups[i].rm_eo);
-            }
-        }
-        regfree(&regex);
+int set_gcommand_gcode(gcommand *g, const char * code){
+    int len = strlen(code);
+    g->gcode = (char *)malloc(sizeof(char) * len);
+    if(g->gcode != NULL){
+        strcpy(g->gcode, code);
+        return 0;
     }
     return 1;
 }
@@ -84,10 +59,12 @@ int get_gcode(gcommand *g){
         get_token(g->line,gcodes[i], tl);
 //printf("Size tk %d\n", tl->size);
         if(tl->size > 0){
-            int len = strlen(gcodes[i]);
-            g->gcode = (char *)malloc(sizeof(char) * len);
-            strcpy(g->gcode, gcodes[i]);
+            set_gcommand_gcode(g, gcodes[i]);
+            //int len = strlen(gcodes[i]);
+            //g->gcode = (char *)malloc(sizeof(char) * len);
+            //strcpy(g->gcode, gcodes[i]);
 //printf("Gcode in get_code %s\n", g->gcode);
+            free_tk_list(tl);
             break;
         } 
     }

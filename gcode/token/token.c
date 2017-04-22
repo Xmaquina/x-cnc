@@ -14,6 +14,20 @@ tk_list * create_list_tk(){
     return tk;
 }
 
+int free_tk_list(tk_list *tl){
+    if(tl != NULL){
+        tk_node *temp;
+        while(tl->head != NULL){
+            temp = tl->head;
+            tl->head = tl->head->next;
+            free(temp->elem);
+            free(temp);
+        }
+        free(tl); 
+    }
+    return 0; 
+}
+
 tk_node * create_node_tk(token *tk){
     tk_node * tn = (tk_node *) malloc(sizeof(tk_node));
     if(tn != NULL){
