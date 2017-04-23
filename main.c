@@ -36,6 +36,8 @@ int main(int argv, char *argc[]){
             printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
         }
     }
+    
+    
     motor *m;
     alloc_motor(&m);
     read_conf(m, X_AXIS);
@@ -47,12 +49,21 @@ int main(int argv, char *argc[]){
     free(m);
     cvNamedWindow("mainWin", CV_WINDOW_AUTOSIZE); 
     cvMoveWindow("mainWin", 100, 100);
-    CvPoint p = cvPoint(100, 100);
-    CvPoint p1 = cvPoint(200, 200);
+    int xini = 120; int yini = 400;
+    CvPoint pi = cvPoint(xini, yini);
     IplImage* img=cvCreateImage(cvSize(1240,480),IPL_DEPTH_8U,3); 
     CvScalar color = cvScalar(0,255,0, 0);
-    cvLine(img, p, p1,color, 1, 8, 0);
-    cvShowImage("mainWin", img );
+    for(gc_node *it = gl->head; it != NULL; it = it->next){
+        if(strcmp(it->elem->gcode, G01) == 0){
+            CvPoint p1 = cvPoint(it->elem->x+xini,yini-it->elem->y);
+printf("Coor point: %d %d\n", p1.x, p1.y);
+            cvLine(img, pi, p1,color, 1, 8, 0);
+            cvShowImage("mainWin", img );
+            pi = cvPoint( p1.x, p1.y);
+        }
+    }
+
     cvWaitKey(0);
+    cvReleaseImage(&img);
     return 0;
 }

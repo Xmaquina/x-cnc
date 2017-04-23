@@ -5,6 +5,14 @@
 #define G00 "G00"
 #define NR_GCODES 2
 
+struct point_{
+    double x;
+    double y;
+    double z;
+};
+    
+typedef struct point_ point;
+
 struct gcommand_{
     char * line;
     char * gcode;
