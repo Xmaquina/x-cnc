@@ -3,6 +3,9 @@
 #include "motor.h"
 #include "gcode/gcode.h"
 #include <string.h>
+#include <math.h>
+#include <cv.h>
+#include <highgui.h>
 
 
 
@@ -42,5 +45,14 @@ int main(int argv, char *argc[]){
     read_conf(m, Y_AXIS);
     printf("Testando\n");
     free(m);
+    cvNamedWindow("mainWin", CV_WINDOW_AUTOSIZE); 
+    cvMoveWindow("mainWin", 100, 100);
+    CvPoint p = cvPoint(100, 100);
+    CvPoint p1 = cvPoint(200, 200);
+    IplImage* img=cvCreateImage(cvSize(1240,480),IPL_DEPTH_8U,3); 
+    CvScalar color = cvScalar(0,255,0, 0);
+    cvLine(img, p, p1,color, 1, 8, 0);
+    cvShowImage("mainWin", img );
+    cvWaitKey(0);
     return 0;
 }
