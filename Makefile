@@ -32,7 +32,7 @@ $(MOTOR) : motor.c motor.h xcncmacros.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(GCODE) : gcode/gcode.c gcode/gcode.h xcncmacros.h $(TOKEN) 
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< -lm
 
 $(TOKEN) : gcode/token/token.c gcode/token/token.h xcncmacros.h
 	$(CC) $(CFLAGS) -c -o $@ $<

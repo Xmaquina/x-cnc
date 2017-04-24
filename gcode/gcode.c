@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <regex.h>
+#include <math.h>
 
 
 gc_list * create_list(){
@@ -124,4 +125,19 @@ int read_gcodefile(char *file_name, gc_list *gl){
     }
     fclose(fp);
     return 1;
+}
+
+
+int make_line_opencv(double *x0, double y0, double *x1, double *y1){
+    double dx = *(x1) - *(x0);
+    double dy = *(y1) - y0;
+    double steps = 0;
+    if (abs(dx) > abs(dy)){
+        steps = abs(dx);
+    }else{
+        steps = abs(dy);
+    }
+    
+
+    return 0;
 }

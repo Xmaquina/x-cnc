@@ -6,6 +6,8 @@
 #include <math.h>
 #include <cv.h>
 #include <highgui.h>
+#include <highgui.h>
+#include <unistd.h>
 
 
 
@@ -54,16 +56,32 @@ int main(int argv, char *argc[]){
     IplImage* img=cvCreateImage(cvSize(1240,480),IPL_DEPTH_8U,3); 
     CvScalar color = cvScalar(0,255,0, 0);
     for(gc_node *it = gl->head; it != NULL; it = it->next){
+printf("Coor point: %lf %lf\n", it->elem->x, it->elem->y);
         if(strcmp(it->elem->gcode, G01) == 0){
-            CvPoint p1 = cvPoint(it->elem->x+xini,yini-it->elem->y);
+            double deltax = (it->elem->x + xini) - pi.x;
+            double deltay = (yini - it->elem->y) - pi.y;
+            double deltaerr = abs(deltay/deltax);
+            double error = deltaerr - 0.5;
+            int y = pi.y; 
+            int i = 0;
+            for(i = pi.x; i < (it->elem->x + xini); i++){
+                CvPoint p1 = cvPoint(i,y);
 printf("Coor point: %d %d\n", p1.x, p1.y);
-            cvLine(img, pi, p1,color, 1, 8, 0);
-            cvShowImage("mainWin", img );
-            pi = cvPoint( p1.x, p1.y);
+                cvLine(img, pi, p1,color, 2, 8, 0);
+                cvShowImage("mainWin", img );
+                cvWaitKey(1000);
+                error = error + deltaerr;
+                if(error >= 0.5){
+                     y = y - 1;
+                     error = error - 1.0;
+                }       
+                
+            }
+            pi = cvPoint( i, y);
+            //sleep(4);
         }
     }
 
-    cvWaitKey(0);
     cvReleaseImage(&img);
     return 0;
 }
