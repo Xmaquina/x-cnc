@@ -1,1 +1,4 @@
 angle = 1.9
+direction = 24
+step = 15
+limit = 16

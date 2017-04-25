@@ -40,6 +40,9 @@ $(TOKEN) : gcode/token/token.c gcode/token/token.h xcncmacros.h
 main.o : main.c $(MOTOR)
 	$(CC) $(CFLAGS)  -c -o $@ $< $(CV_INCLUDE)
 
+clear:
+	rm *.o
+
 clean:
 	rm *.o    
 	rm x-cnc

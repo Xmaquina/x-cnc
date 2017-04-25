@@ -1,5 +1,5 @@
 #include "motor.h"
-#include "xcncmacros.h"
+#include "../xcncmacros.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -40,7 +40,7 @@ char * type_axis_c(motor_axis m){
 }
 
 char * motor_file_name(motor *m){
-    char * f = "conf/stepper-motor-";
+    char * f = "../conf/stepper-motor-";
     char * r = malloc(sizeof(char) * 120);
     strcpy(r,f);
     strcat(r, type_axis(m));
@@ -58,6 +58,9 @@ int motor_file_exists(motor *m){
 
 int print_motor(motor *m){
     printf("Angle: %lf\n", m->step);
+    printf("Pin direction: %d\n", m->pin_direction );
+    printf("Pin Step: %d\n", m->pin_step );
+    printf("Pin Limit: %d\n", m->pin_limit );
     return 1;
 }
 
@@ -77,9 +80,14 @@ int read_conf(motor *m, int motor){
     }
     char buffer[255];
     double angle = 0;
+    int value = 0;
     fscanf(fp, "%s = %lf", buffer, &angle);
     if(strcmp(buffer, "angle") == 0){
         m->step = angle;
+    }
+    fscanf(fp, "%s = %d", buffer, &value);
+    if(strcmp(buffer, "direction") == 0){
+        m->pin_direction = (int)value;
     }
     print_motor(m);
     fclose(fp); 

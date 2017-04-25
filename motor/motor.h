@@ -20,6 +20,10 @@ typedef enum motor_axis_ motor_axis;
 struct motor_{
     double step;
     motor_axis axis;
+    int pin_direction;
+    int pin_step;
+    int pin_limit;
+    
  
 };
 
