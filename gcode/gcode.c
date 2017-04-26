@@ -1,5 +1,5 @@
 #include "gcode.h"
-#include "token/token.h"
+#include "../token/token.h"
 #include "../xcncmacros.h"
 #include <string.h>
 #include <stdio.h>

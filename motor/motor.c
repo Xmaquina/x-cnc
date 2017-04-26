@@ -3,6 +3,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include "../token/token.h"
+
 #ifdef RASP_OS 
     #include<wiringPi.h>
 #endif

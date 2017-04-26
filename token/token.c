@@ -4,7 +4,7 @@
 #include <string.h>
 #include <errno.h>
 #include <ctype.h>
-#include "../../xcncmacros.h"
+#include "../xcncmacros.h"
 
 tk_list * create_list_tk(){
     tk_list *tk = (tk_list *) malloc(sizeof(tk_list));
@@ -96,6 +96,20 @@ int get_token(const char *line, const char *word, tk_list *tl){
 
 }
 
+
+int int_after_token(const char *text, const char *word, int *num){
+    token * tk =  get_digits_after_token(text, word);
+    if(tk != NULL){
+        int size_num = tk->end - tk->begin + 1;
+        char *c = malloc(sizeof(char) * size_num);
+        memset(c,'\0', size_num);
+        strncpy(c, text+tk->begin, size_num);
+        *(num) = atoi(c);
+        return 0;
+    }
+    return 1;
+
+}
 
 token * get_digits_after_token(const char *line, const char *word ){
     tk_list *tl = create_list_tk();
