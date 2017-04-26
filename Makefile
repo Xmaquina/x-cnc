@@ -28,7 +28,7 @@ all = $(TARGET)
 $(TARGET): main.o $(MOTOR) $(GCODE) $(TOKEN)
 	$(CC) $(CFLAGS) -o $@ $^ $(CV_LIBS)
 
-$(MOTOR) : motor.c motor.h xcncmacros.h
+$(MOTOR) : motor/motor.c motor/motor.h xcncmacros.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(GCODE) : gcode/gcode.c gcode/gcode.h xcncmacros.h $(TOKEN) 

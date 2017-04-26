@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "motor.h"
+#include "motor/motor.h"
 #include "gcode/gcode.h"
 #include <string.h>
 #include <math.h>
