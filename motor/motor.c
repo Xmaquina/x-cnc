@@ -87,9 +87,17 @@ int read_conf(motor *m, int motor){
     if(strcmp(buffer, "angle") == 0){
         m->step = angle;
     }
-    fscanf(fp, "%s = %d", buffer, &value);
-    if(strcmp(buffer, "direction") == 0){
-        m->pin_direction = (int)value;
+    for(int i = 0; i < 3; i++){
+        fscanf(fp, "%s = %d", buffer, &value);
+        if(strcmp(buffer, DIRECTION) == 0){
+            m->pin_direction = (int)value;
+        }
+        if(strcmp(buffer, STEP) == 0){
+            m->pin_step = (int)value;
+        }
+        if(strcmp(buffer, LIMIT) == 0){
+            m->pin_limit = (int)value;
+        }
     }
     print_motor(m);
     fclose(fp); 

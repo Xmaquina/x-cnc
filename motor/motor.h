@@ -7,6 +7,12 @@
 #define CX_AXIS "X_AXIS"
 #define CY_AXIS "Y_AXIS"
 #define CZ_AXIS "Z_AXIS"
+#define ANGLE "angle"
+#define DIRECTION "direction"
+#define STEP "step"
+#define LIMIT "limit" 
+
+//const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};
 
 enum motor_axis_{
     x_axis = X_AXIS,
