@@ -97,13 +97,14 @@ int get_token(const char *line, const char *word, tk_list *tl){
 }
 
 
-int int_after_token(const char *text, const char *word, int *num){
-    token * tk =  get_digits_after_token(text, word);
+int int_after_token(const char *text, const char *word, int space, int *num){
+    token * tk =  get_digits_after_token(text, word, space);
     if(tk != NULL){
         int size_num = tk->end - tk->begin + 1;
         char *c = malloc(sizeof(char) * size_num);
         memset(c,'\0', size_num);
         strncpy(c, text+tk->begin, size_num);
+//printf("c: %s\n", c);
         *(num) = atoi(c);
         return 0;
     }
@@ -111,13 +112,20 @@ int int_after_token(const char *text, const char *word, int *num){
 
 }
 
-token * get_digits_after_token(const char *line, const char *word ){
+token * get_digits_after_token(const char *line, const char *word, int space ){
     tk_list *tl = create_list_tk();
     get_token(line, word, tl);
 	int len = strlen(line);
     if(tl->size == 1){
-        int i = 0;
-        for(i = tl->head->elem->end + 1; i < len; i++){
+        int begin = tl->head->elem->end; 
+        if(space == 1){
+            begin += 2;
+        }else{
+            begin += 1;
+        }
+        int i = begin;
+//printf("i %d\n", i);
+        for(; i < len; i++){
             if(!isdigit(line[i])){
                 break;
             }
@@ -125,7 +133,7 @@ token * get_digits_after_token(const char *line, const char *word ){
 //printf("len line %d\n", len);
         token *tk = malloc(sizeof(token));
         if(tk == NULL) return NULL;
-        tk->begin = tl->head->elem->end + 1;
+        tk->begin = begin;
         tk->end = i - 1;
 //printf("Value of %d\n", i);
         free_tk_list(tl);

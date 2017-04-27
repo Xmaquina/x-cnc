@@ -29,6 +29,7 @@ tk_list * create_list_tk();
 int add_tk(tk_list *tl, token *tk);
 int add_pair(tk_list *tl, int begin, int end);
 int get_token(const char *line, const char *word, tk_list *tl);
-token * get_digits_after_token(const char *line, const char *word );
+token * get_digits_after_token(const char *line, const char *word, int space );
+int int_after_token(const char *text, const char *word,int space, int *num);
 int free_tk_list(tk_list *tl);
 #endif
