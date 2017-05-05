@@ -63,6 +63,9 @@ int print_motor(motor *m){
     printf("Pin direction: %d\n", m->pin_direction );
     printf("Pin Step: %d\n", m->pin_step );
     printf("Pin Limit: %d\n", m->pin_limit );
+    printf("Pin ms1: %d\n", m->pin_ms1 );
+    printf("Pin ms2: %d\n", m->pin_ms2 );
+    printf("Pin ms3: %d\n", m->pin_ms3 );
     return 1;
 }
 
@@ -87,7 +90,7 @@ int read_conf(motor *m, int motor){
     if(strcmp(buffer, "angle") == 0){
         m->step = angle;
     }
-    for(int i = 0; i < 3; i++){
+    for(int i = 0; i < 6; i++){
         fscanf(fp, "%s = %d", buffer, &value);
         if(strcmp(buffer, DIRECTION) == 0){
             m->pin_direction = (int)value;
@@ -98,11 +101,93 @@ int read_conf(motor *m, int motor){
         if(strcmp(buffer, LIMIT) == 0){
             m->pin_limit = (int)value;
         }
+        if(strcmp(buffer, MS1) == 0){
+            m->pin_ms1 = (int)value;
+        }
+        if(strcmp(buffer, MS2) == 0){
+            m->pin_ms2 = (int)value;
+        }
+        if(strcmp(buffer, MS3) == 0){
+            m->pin_ms3 = (int)value;
+        }
     }
     print_motor(m);
     fclose(fp); 
     
    return 0; 
+
+}
+
+int setup_motor(motor *m){
+#ifdef RASP_OS 
+    pinMode(m->pin_step, OUTPUT);
+    pinMode(m->pin_direction, OUTPUT);
+    pinMode(m->pin_ms1, OUTPUT);
+    pinMode(m->pin_ms2, OUTPUT);
+    pinMode(m->pin_ms3, OUTPUT);
+#endif
+    return 0;
+
+}
+
+int setdown_motor(motor *m){
+#ifdef RASP_OS 
+    digitalWrite(m->pin_step, LOW);
+    digitalWrite(m->pin_direction, LOW);
+    digitalWrite(m->pin_ms1, LOW);
+    digitalWrite(m->pin_ms2, LOW);
+    digitalWrite(m->pin_ms3, LOW);
+#endif
+    return 0;
+
+}
+
+int set_eighth_step(motor *m){
+#ifdef RASP_OS 
+    digitalWrite(m->pin_ms1, HIGH);
+    digitalWrite(m->pin_ms2, HIGH);
+    digitalWrite(m->pin_ms3, LOW);
+#endif
+    return 0;
+
+}
+
+int set_sixteenth_step(motor *m){
+#ifdef RASP_OS 
+    digitalWrite(m->pin_ms1, HIGH);
+    digitalWrite(m->pin_ms2, HIGH);
+    digitalWrite(m->pin_ms3, HIGH);
+#endif
+    return 0;
+
+}
+int set_quarter_step(motor *m){
+#ifdef RASP_OS 
+    digitalWrite(m->pin_ms1, LOW);
+    digitalWrite(m->pin_ms2, HIGH);
+    digitalWrite(m->pin_ms3, LOW);
+#endif
+    return 0;
+
+}
+
+int set_half_step(motor *m){
+#ifdef RASP_OS 
+    digitalWrite(m->pin_ms1, HIGH);
+    digitalWrite(m->pin_ms2, LOW);
+    digitalWrite(m->pin_ms3, LOW);
+#endif
+    return 0;
+
+}
+
+int set_full_step(motor *m){
+#ifdef RASP_OS 
+    digitalWrite(m->pin_ms1, LOW);
+    digitalWrite(m->pin_ms2, LOW);
+    digitalWrite(m->pin_ms3, LOW);
+#endif
+    return 0;
 
 }
 

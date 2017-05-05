@@ -35,41 +35,6 @@ int main(int argv, char *argc[]){
     set_full_step(m);
     delay(4000);
     setdown_motor(m);
-    /*
-    pinMode(0, OUTPUT);
-    pinMode(2, OUTPUT);
-    pinMode(3, OUTPUT);
-    pinMode(m->pin_step, OUTPUT);
-    pinMode(m->pin_direction, OUTPUT);
-    pinMode(m1->pin_step, OUTPUT);
-    digitalWrite(0, HIGH);
-    digitalWrite(2, LOW);
-    digitalWrite(3, LOW);
-    for(int i = 0; i < 10; i++){
-        printf("Pinos sendo ativado\n");
-        MOVE(m);
-        STOP(m1);
-        delay(700);
-        printf("Pinos sendo desativado\n");
-        STOP(m);
-        MOVE(m1);
-        delay(700);
-    }
-    //STOP(m1);
-    STOP(m);
-   
-    for(int i = 0; i < 10; i++){ 
-        printf("movendo\n");
-        STOP(m);
-        MOVE(m);
-        //FORWARD(m);
-        delay(1);
-        //printf("Indo pra tras\n");
-        //BACKWARD(m);
-        //printf("Parado:\n");
-        //delay(2);
-    }
-    */
     free(m);
     free(m1);
     return 0;

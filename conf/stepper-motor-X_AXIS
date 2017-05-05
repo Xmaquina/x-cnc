@@ -2,3 +2,6 @@ angle = 1.9
 direction = 4
 step = 5
 limit = 25
+ms1 = 0
+ms2 = 2
+ms3 = 3

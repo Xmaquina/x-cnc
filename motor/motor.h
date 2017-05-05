@@ -11,6 +11,9 @@
 #define DIRECTION "direction"
 #define STEP "step"
 #define LIMIT "limit" 
+#define MS1 "ms1" 
+#define MS2 "ms2" 
+#define MS3 "ms3" 
 #define RASP_OS 1 
 #ifdef RASP_OS 
     #define MOVE(x) digitalWrite((x)->pin_step,LOW) 
@@ -35,6 +38,9 @@ struct motor_{
     int pin_direction;
     int pin_step;
     int pin_limit;
+    int pin_ms1;
+    int pin_ms2;
+    int pin_ms3;
     
  
 };
@@ -46,5 +52,11 @@ int read_conf(motor * m, int motor);
 int move_motor(motor *m);
 char * type_axis(motor *m);
 char * type_axis_c(motor_axis m);
-
+int setup_motor(motor *m);
+int setdown_motor(motor *m);
+int set_sixteenth_step(motor *m);
+int set_eighth_step(motor *m);
+int set_quarter_step(motor *m);
+int set_half_step(motor *m);
+int set_full_step(motor *m);
 #endif
