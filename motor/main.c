@@ -18,8 +18,16 @@ int main(int argv, char *argc[]){
     }
     printf("Pit step: %d\n", m->pin_step);
     printf("Pit step: %d\n", m1->pin_step);
+    pinMode(0, OUTPUT);
+    pinMode(2, OUTPUT);
+    pinMode(3, OUTPUT);
     pinMode(m->pin_step, OUTPUT);
+    pinMode(m->pin_direction, OUTPUT);
     pinMode(m1->pin_step, OUTPUT);
+    digitalWrite(0, HIGH);
+    digitalWrite(2, LOW);
+    digitalWrite(3, LOW);
+    /*
     for(int i = 0; i < 10; i++){
         printf("Pinos sendo ativado\n");
         MOVE(m);
@@ -30,17 +38,21 @@ int main(int argv, char *argc[]){
         MOVE(m1);
         delay(700);
     }
-    STOP(m1);
+    */
+    //STOP(m1);
     STOP(m);
-    
-    printf("Indo pra frente\n");
-    FORWARD(m);
-    MOVE(m);
-    delay(2000);
-    printf("Indo pra tras\n");
-    BACKWARD(m);
-    delay(1000);
-    STOP(m);
+   
+    for(int i = 0; i < 10000; i++){ 
+        printf("movendo\n");
+        STOP(m);
+        MOVE(m);
+        //FORWARD(m);
+        delay(1);
+        //printf("Indo pra tras\n");
+        //BACKWARD(m);
+        //printf("Parado:\n");
+        //delay(2);
+    }
     free(m);
     free(m1);
     return 0;
