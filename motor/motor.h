@@ -11,7 +11,10 @@
 #define DIRECTION "direction"
 #define STEP "step"
 #define LIMIT "limit" 
-
+#define MOVE(x) digitalWrite(x->step,HIGH) 
+#define RASP_OS 1 
+#ifdef RASP_OS 
+#endif
 //const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};
 
 enum motor_axis_{

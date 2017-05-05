@@ -1,9 +1,16 @@
 #
 #   Makefile
 #
+WIRINGFLAG  = -l wiringPi
 UNAME       = $(shell uname)
 CC          = gcc
-CFLAGS      = -g -Wall -std=c99
+
+ifeq ($(UNAME), Darwin)
+	CFLAGS=-g -Wall -std=c99
+else
+	CFLAGS=-g -Wall -std=c99 $(WIRINGFLAG) 
+endif
+
 
 TARGET   = prog
 MAIN     = main.c
