@@ -11,9 +11,12 @@
 #define DIRECTION "direction"
 #define STEP "step"
 #define LIMIT "limit" 
-#define MOVE(x) digitalWrite(x->step,HIGH) 
 #define RASP_OS 1 
 #ifdef RASP_OS 
+    #define MOVE(x) digitalWrite((x)->pin_step,HIGH) 
+    #define STOP(x) digitalWrite((x)->pin_step,LOW) 
+    #define FORWARD(x) digitalWrite((x)->pin_direction, HIGH)
+    #define BACKWARD(x) digitalWrite((x)->pin_direction, LOW)
 #endif
 //const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};
 

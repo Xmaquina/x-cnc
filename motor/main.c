@@ -4,8 +4,6 @@
 #include <string.h>
 #include <wiringPi.h>
 
-#define MOVE(x) digitalWrite(x->step,HIGH) 
-
 
 
 int main(int argv, char *argc[]){
@@ -24,15 +22,25 @@ int main(int argv, char *argc[]){
     pinMode(m1->pin_step, OUTPUT);
     for(int i = 0; i < 10; i++){
         printf("Pinos sendo ativado\n");
-        digitalWrite(m->pin_step, HIGH);
-        digitalWrite(m1->pin_step, LOW);
+        MOVE(m);
+        STOP(m1);
         delay(700);
         printf("Pinos sendo desativado\n");
-        digitalWrite(m->pin_step, LOW);
-        digitalWrite(m1->pin_step, HIGH);
-        //MOVE(m1);
+        STOP(m);
+        MOVE(m1);
         delay(700);
     }
+    STOP(m1);
+    STOP(m);
+    
+    printf("Indo pra frente\n");
+    FORWARD(m);
+    MOVE(m);
+    delay(2000);
+    printf("Indo pra tras\n");
+    BACKWARD(m);
+    delay(1000);
+    STOP(m);
     free(m);
     free(m1);
     return 0;
