@@ -14,6 +14,7 @@
 #define MS1 "ms1" 
 #define MS2 "ms2" 
 #define MS3 "ms3" 
+#include "../osmacros.h"
 #ifdef RASP_OS 
     #define MOVE(x) digitalWrite((x)->pin_step,HIGH); delay(1); \
                     digitalWrite((x)->pin_step,LOW) 

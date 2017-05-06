@@ -27,14 +27,14 @@ DTEST      = directiontest
 all = $(TARGET)
 
 
-$(TARGET): main.o $(MOTOR) 
+$(TARGET): main.o $(MOTOR) $(MACROS) 
 	@echo $(DISTRO)
 	$(CC) $(CFLAGS) -o $@ $^
 
-steptest: steptest.o $(MOTOR) 
+steptest: steptest.o $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS) -o $@ $^
 
-dtest: $(DTEST).o $(MOTOR) 
+dtest: $(DTEST).o $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS) -o $@ $^
 
 
@@ -42,13 +42,13 @@ $(MOTOR) : motor.c motor.h ../xcncmacros.h $(MACROS)
 	@echo $(MACROS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-main.o : main.c $(MOTOR)
+main.o : main.c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
-steptest.o : steptests.c $(MOTOR)
+steptest.o : steptests.c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
-$(DTEST).o : $(DTEST).c $(MOTOR)
+$(DTEST).o : $(DTEST).c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 clean:
