@@ -19,32 +19,8 @@ int main(int argv, char *argc[]){
     printf("Pit step: %d\n", m->pin_step);
     printf("Pit step: %d\n", m1->pin_step);
     setup_motor(m);
-    printf("Sixteenth\n");
-    set_sixteenth_step(m);
-    delay(4000);
-    printf("Eighth\n");
     set_eighth_step(m);
-    delay(4000);
-    printf("Quarter\n");
-    set_quarter_step(m);
-    delay(4000);
-    printf("Half\n");
-    set_half_step(m);
-    delay(4000);
-    printf("Full\n");
-    set_full_step(m);
-    delay(4000);
-    setdown_motor(m);
-    /*
-    pinMode(0, OUTPUT);
-    pinMode(2, OUTPUT);
-    pinMode(3, OUTPUT);
-    pinMode(m->pin_step, OUTPUT);
-    pinMode(m->pin_direction, OUTPUT);
-    pinMode(m1->pin_step, OUTPUT);
-    digitalWrite(0, HIGH);
-    digitalWrite(2, LOW);
-    digitalWrite(3, LOW);
+     /*
     for(int i = 0; i < 10; i++){
         printf("Pinos sendo ativado\n");
         MOVE(m);
@@ -57,10 +33,10 @@ int main(int argv, char *argc[]){
     }
     //STOP(m1);
     STOP(m);
-   
+    */
+    delay(5000); 
     for(int i = 0; i < 10; i++){ 
         printf("movendo\n");
-        STOP(m);
         MOVE(m);
         //FORWARD(m);
         delay(1);
@@ -69,7 +45,7 @@ int main(int argv, char *argc[]){
         //printf("Parado:\n");
         //delay(2);
     }
-    */
+    setdown_motor(m);
     free(m);
     free(m1);
     return 0;
