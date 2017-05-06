@@ -2,12 +2,17 @@
 #include <stdio.h>
 #include "motor.h"
 #include <string.h>
-#include <wiringPi.h>
+#ifdef RASP_OS
+    #include <wiringPi.h>
+#endif
+
 
 
 
 int main(int argv, char *argc[]){
+    #ifdef RASP_OS
     wiringPiSetup();    
+    #endif
     motor *m, *m1;
     alloc_motor(&m);
     alloc_motor(&m1);
@@ -26,7 +31,9 @@ int main(int argv, char *argc[]){
         MOVE(m);
         time += 1;
     }
+    #ifdef RASP_OS
     delay(2000);
+    #endif
     printf("Depois movendo para trás por 200 ms.\n");
     time = 0;
     BACKWARD(m);
