@@ -1,5 +1,6 @@
 #include "motor.h"
 #include "../xcncmacros.h"
+#include "../osmacros.h"
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>

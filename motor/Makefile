@@ -7,9 +7,9 @@ DISTRO      = $(shell lsb_release -si)
 CC          = gcc
 
 ifeq ($(DISTRO), Ubuntu)
-	R=$(shell sed -i s/RASP_OS/OTHERS/g ../osmacros.h)
+	R=$(shell sed -i 's/RASP_OS/OTHERS/g' '../osmacros.h')
 else
-	R=$(shell sed -i s/OTHERS/RASP_OS/g '../osmacros.h')
+	R=$(shell sed -i "s/OTHERS/RASP_OS/g '../osmacros.h")
 endif
 
 ifeq ($(UNAME), Darwin)
@@ -29,6 +29,7 @@ all = $(TARGET)
 
 $(TARGET): main.o $(MOTOR) $(MACROS) 
 	@echo $(DISTRO)
+	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
 
 steptest: steptest.o $(MOTOR) $(MACROS) 
