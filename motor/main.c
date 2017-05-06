@@ -2,12 +2,15 @@
 #include <stdio.h>
 #include "motor.h"
 #include <string.h>
-#include <wiringPi.h>
-
+#ifdef RASP_OS
+    #include <wiringPi.h>
+#endif
 
 
 int main(int argv, char *argc[]){
-    wiringPiSetup();    
+    #ifdef RASP_OS
+    wiringPiSetup();
+    #endif    
     motor *m, *m1;
     alloc_motor(&m);
     alloc_motor(&m1);
@@ -34,12 +37,12 @@ int main(int argv, char *argc[]){
     //STOP(m1);
     STOP(m);
     */
-    delay(5000); 
+    //delay(5000); 
     for(int i = 0; i < 10; i++){ 
         printf("movendo\n");
         MOVE(m);
         //FORWARD(m);
-        delay(1);
+        //delay(1);
         //printf("Indo pra tras\n");
         //BACKWARD(m);
         //printf("Parado:\n");

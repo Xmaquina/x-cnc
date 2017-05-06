@@ -14,13 +14,18 @@
 #define MS1 "ms1" 
 #define MS2 "ms2" 
 #define MS3 "ms3" 
-#define RASP_OS 1 
 #ifdef RASP_OS 
     #define MOVE(x) digitalWrite((x)->pin_step,HIGH); delay(1); \
                     digitalWrite((x)->pin_step,LOW) 
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 
     #define FORWARD(x) digitalWrite((x)->pin_direction, HIGH)
     #define BACKWARD(x) digitalWrite((x)->pin_direction, LOW)
+#else
+    #define MOVE(x) printf("movimento\n") 
+    #define STOP(x)  printf("stop\n") 
+    #define FORWARD(x) printf("pra frente\n") 
+    #define BACKWARD(x) printf("pra tras\n") 
+
 #endif
 //const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};
 
