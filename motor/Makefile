@@ -7,9 +7,9 @@ DISTRO      = $(shell lsb_release -si)
 CC          = gcc
 
 ifeq ($(DISTRO), Ubuntu)
-	MACROS=
+	R=$(shell sed -i s/RASP_OS/OTHERS/g ../osmacros.h)
 else
-	MACROS=../osmacros.h
+	R=$(shell sed -i s/OTHERS/RASP_OS/g '../osmacros.h')
 endif
 
 ifeq ($(UNAME), Darwin)
