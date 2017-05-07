@@ -13,7 +13,11 @@
 #include <termios.h>
 #include <signal.h>
 #include "motor.h"
- 
+#include "../osmacros.h"
+#ifdef RASP_OS
+    #include <wiringPi.h>
+#endif
+
 void handler (int sig){
   printf ("nexiting...(%d)n", sig);
   exit (0);
