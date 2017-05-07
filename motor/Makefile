@@ -23,6 +23,7 @@ TARGET     = prog
 MAIN       = main.c
 MOTOR      = motor.o 
 DTEST      = directiontest
+KTEST      = keytest
 
 all = $(TARGET)
 
@@ -38,6 +39,9 @@ steptest: steptest.o $(MOTOR) $(MACROS)
 dtest: $(DTEST).o $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS) -o $@ $^
 
+ktest: $(KTEST).o $(MOTOR) $(MACROS) 
+	$(CC) $(CFLAGS) -o $@ $^ -lrt
+
 
 $(MOTOR) : motor.c motor.h ../xcncmacros.h $(MACROS) 
 	@echo $(MACROS)
@@ -51,6 +55,9 @@ steptest.o : steptests.c $(MOTOR) $(MACROS)
 
 $(DTEST).o : $(DTEST).c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
+
+$(KTEST).o : $(KTEST).c $(MOTOR) $(MACROS) 
+	$(CC) $(CFLAGS)  -c -o $@ $< -lrt
 
 clean:
 	rm *.o    
