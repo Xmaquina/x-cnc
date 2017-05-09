@@ -14,10 +14,11 @@
 #define MS1 "ms1" 
 #define MS2 "ms2" 
 #define MS3 "ms3" 
+#define SET_STEP "set_step" 
 #include "../osmacros.h"
 #ifdef RASP_OS 
-    #define MOVE(x) digitalWrite((x)->pin_step,HIGH); delay(1); \
-                    digitalWrite((x)->pin_step,LOW) 
+    #define MOVE(x) digitalWrite((x)->pin_step,HIGH); \
+                    digitalWrite((x)->pin_step,LOW);  
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 
     #define FORWARD(x) digitalWrite((x)->pin_direction, HIGH)
     #define BACKWARD(x) digitalWrite((x)->pin_direction, LOW)
@@ -48,6 +49,7 @@ struct motor_{
     int pin_ms1;
     int pin_ms2;
     int pin_ms3;
+    int set_step;
     
  
 };
@@ -59,11 +61,11 @@ int read_conf(motor * m, int motor);
 int move_motor(motor *m);
 char * type_axis(motor *m);
 char * type_axis_c(motor_axis m);
-int setup_motor(motor *m);
-int setdown_motor(motor *m);
 int set_sixteenth_step(motor *m);
 int set_eighth_step(motor *m);
 int set_quarter_step(motor *m);
 int set_half_step(motor *m);
 int set_full_step(motor *m);
+int setup_motor(motor *m);
+int setdown_motor(motor *m);
 #endif

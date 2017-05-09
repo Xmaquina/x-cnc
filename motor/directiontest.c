@@ -23,12 +23,14 @@ int main(int argv, char *argc[]){
     }
     int time = 0;
     setup_motor(m);
-    set_sixteenth_step(m);
+    //set_sixteenth_step(m);
     printf("Esse teste é feito para verificar se a direcaco esta mudando:\n");
     printf("Primeiro movendo pra frente por 200 ms.\n");
     FORWARD(m);
     while(time < 200){
-        MOVE(m);
+        digitalWrite(m->pin_step,HIGH); 
+        delay(1);
+        digitalWrite(m->pin_step,LOW);
         time += 1;
     }
     #ifdef RASP_OS
