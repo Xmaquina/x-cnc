@@ -112,21 +112,33 @@ int int_after_token(const char *text, const char *word, int space, int *num){
 
 }
 
-token * get_digits_after_token(const char *line, const char *word, int space ){
+int double_after_token(const char *text, const char *word, int spaces, double *num){
+    token * tk =  get_digits_after_token(text, word, spaces);
+    if(tk != NULL){
+        int size_num = tk->end - tk->begin + 1;
+        char *c = malloc(sizeof(char) * size_num);
+        memset(c,'\0', size_num);
+        strncpy(c, text+tk->begin, size_num);
+//printf("c: %s\n", c);
+        *(num) = atof(c);
+        return 0;
+    }
+    return 1;
+
+}
+
+token * get_digits_after_token(const char *line, const char *word, int spaces ){
+    spaces = spaces <= 1 ? 1 : spaces;
     tk_list *tl = create_list_tk();
     get_token(line, word, tl);
 	int len = strlen(line);
     if(tl->size == 1){
         int begin = tl->head->elem->end; 
-        if(space == 1){
-            begin += 2;
-        }else{
-            begin += 1;
-        }
+        begin += spaces;
         int i = begin;
 //printf("i %d\n", i);
         for(; i < len; i++){
-            if(!isdigit(line[i])){
+            if(!(isdigit(line[i]) || line[i] == '.')){
                 break;
             }
         }

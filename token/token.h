@@ -31,5 +31,6 @@ int add_pair(tk_list *tl, int begin, int end);
 int get_token(const char *line, const char *word, tk_list *tl);
 token * get_digits_after_token(const char *line, const char *word, int space );
 int int_after_token(const char *text, const char *word,int space, int *num);
+int double_after_token(const char *text, const char *word, int spaces, double *num);
 int free_tk_list(tk_list *tl);
 #endif

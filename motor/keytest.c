@@ -85,6 +85,14 @@ int main (int argc, char *argv[]){
             BACKWARD(m);
             MOVE(m);
         }
+        if(ev[1].code == 103){
+            BACKWARD(m1);
+            MOVE(m1);
+        }
+        if(ev[1].code == 108){
+            BACKWARD(m1);
+            MOVE(m1);
+        }
       }
     }
  

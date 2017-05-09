@@ -43,7 +43,7 @@ int add(gc_list *gl, gcommand *gc){
 }
 
 double get_digits_coordenate(gcommand *g, char *coord){
-    token *tk = get_digits_after_token(g->line, coord);
+    token *tk = get_digits_after_token(g->line, coord,0 );
     if(tk != NULL){
         //printf("Begin %d End %d\n", tk->begin, tk->end);
         char c[3];
@@ -61,11 +61,16 @@ int set_G01_coordenates(gcommand *g){
     if(strcmp(g->gcode, G01) != 0){
         return 1;
     }
-    
-    g->x = get_digits_coordenate(g, "X");
-    g->y = get_digits_coordenate(g, "Y");
-    g->z = get_digits_coordenate(g, "Z");
-    g->f = get_digits_coordenate(g, "F");
+    //int val = 0;
+    double_after_token(g->line, "X",0, &g->x);
+    double_after_token(g->line, "Y",0, &g->y);
+    double_after_token(g->line, "Z",0, &g->z);
+    double_after_token(g->line, "F",0, &g->f);
+    //g->x = (double)val;
+    //g->x = get_digits_coordenate(g, "X");
+    //g->y = get_digits_coordenate(g, "Y");
+    //g->z = get_digits_coordenate(g, "Z");
+    //g->f = get_digits_coordenate(g, "F");
     
     return 0;
 }
