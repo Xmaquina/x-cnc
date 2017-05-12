@@ -8,14 +8,23 @@
 
 
 int main(int argv, char *argc[]){
+    int direcao = atoi(argc[1]);
+printf("A direcao %d\n", direcao);
+    int qtde = atoi(argc[2]);
+printf("A qtde %d\n", qtde);
+    int mot = atoi(argc[3]);
+printf("O motor %d\n", mot);
     #ifdef RASP_OS
     wiringPiSetup();
     #endif    
     motor *m, *m1;
     alloc_motor(&m);
     //alloc_motor(&m1);
-    read_conf(m, X_AXIS);
-    //read_conf(m1, Y_AXIS);
+    if(mot == 1){
+        read_conf(m, X_AXIS);
+    }else{
+        read_conf(m, Y_AXIS);
+    }
     if(m == NULL){
         printf("You have to allocated it\n");
     }
@@ -38,13 +47,16 @@ int main(int argv, char *argc[]){
     STOP(m);
     */
     //delay(5000); 
-    BACKWARD(m);
-    //FORWARD(m);
-    for(int i = 0; i < 40000; i++){ 
+    if(direcao == 1){
+        BACKWARD(m);
+    }else{
+        FORWARD(m);
+    }
+    for(int i = 0; i < qtde; i++){ 
         //printf("movendo\n");
         MOVE(m);
         //FORWARD(m);
-        //delay(1);
+        delay(1);
         //printf("Indo pra tras\n");
         //BACKWARD(m);
         //printf("Parado:\n");

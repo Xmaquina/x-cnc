@@ -52,9 +52,10 @@ printf("A qtde %d\n", qtde);
     for(int i = 0; i < qtde; i++){ 
         //printf("movendo\n");
         MOVE(m);
+        delay(1);
         MOVE(m1);
         //FORWARD(m);
-        //delay(1);
+        delay(1);
         //printf("Indo pra tras\n");
         //BACKWARD(m);
         //printf("Parado:\n");
