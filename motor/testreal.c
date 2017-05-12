@@ -8,6 +8,10 @@
 
 
 int main(int argv, char *argc[]){
+    int direcao = atoi(argc[1]);
+printf("A direcao %d\n", direcao);
+    int qtde = atoi(argc[2]);
+printf("A qtde %d\n", qtde);
     #ifdef RASP_OS
     wiringPiSetup();
     #endif    
@@ -38,9 +42,12 @@ int main(int argv, char *argc[]){
     STOP(m);
     */
     //delay(5000); 
-    BACKWARD(m);
-    //FORWARD(m);
-    for(int i = 0; i < 40000; i++){ 
+    if(direcao == 1){
+        BACKWARD(m);
+    }else{
+        FORWARD(m);
+    }
+    for(int i = 0; i < qtde; i++){ 
         //printf("movendo\n");
         MOVE(m);
         //FORWARD(m);
