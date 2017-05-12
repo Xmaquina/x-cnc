@@ -17,9 +17,9 @@ printf("A qtde %d\n", qtde);
     #endif    
     motor *m, *m1;
     alloc_motor(&m);
-    //alloc_motor(&m1);
+    alloc_motor(&m1);
     read_conf(m, X_AXIS);
-    //read_conf(m1, Y_AXIS);
+    read_conf(m1, Y_AXIS);
     if(m == NULL){
         printf("You have to allocated it\n");
     }
@@ -44,12 +44,15 @@ printf("A qtde %d\n", qtde);
     //delay(5000); 
     if(direcao == 1){
         BACKWARD(m);
+        BACKWARD(m1);
     }else{
         FORWARD(m);
+        FORWARD(m1);
     }
     for(int i = 0; i < qtde; i++){ 
         //printf("movendo\n");
         MOVE(m);
+        MOVE(m1);
         //FORWARD(m);
         //delay(1);
         //printf("Indo pra tras\n");
@@ -58,7 +61,8 @@ printf("A qtde %d\n", qtde);
         //delay(2);
     }
     setdown_motor(m);
+    setdown_motor(m1);
     free(m);
-    //free(m1);
+    free(m1);
     return 0;
 }

@@ -39,6 +39,8 @@ int main (int argc, char *argv[]){
       printf("Please specify (on the command line) the path to the dev event interface devicen");
       exit (0);
     }
+    int qtde = atoi(argv[2]);
+printf("A qtde %d\n", qtde);
 
     if ((getuid ()) != 0)
     printf ("You are not root! This may not work...\n");
@@ -77,23 +79,35 @@ int main (int argc, char *argv[]){
 
       if (value != ' ' && ev[1].value == 1 && ev[1].type == 1){ // Only read the key press event
         printf ("Code[%d]\n", (ev[1].code));
-        if(ev[1].code == 106){
+        if(ev[1].code == 106){            
             FORWARD(m);
-            MOVE(m);
-            delay(1);
+            for(int i = 0; i < qtde; i++){
+                MOVE(m);
+            }
+printf("Stop\n");
+            //delay(1);
         }
         if(ev[1].code == 105){
             BACKWARD(m);
-            MOVE(m);
-            delay(1);
+            for(int i = 0; i < qtde; i++){
+                MOVE(m);
+            }
+printf("Stop\n");
+            //delay(1);
         }
         if(ev[1].code == 103){
             BACKWARD(m1);
-            MOVE(m1);
+            for(int i = 0; i < qtde; i++){
+                MOVE(m1);
+            }
+printf("Stop\n");
         }
         if(ev[1].code == 108){
-            BACKWARD(m1);
-            MOVE(m1);
+            FORWARD(m1);
+            for(int i = 0; i < qtde; i++){
+                MOVE(m1);
+            }
+printf("Stop\n");
         }
       }
     }
