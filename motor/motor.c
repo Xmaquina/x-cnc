@@ -185,6 +185,7 @@ int setup_motor(motor *m){
         set_sixteenth_step(m);
     }
     if(m->set_step == 2){
+        printf("PAssou aqui 2\n");
         set_eighth_step(m);
     }
     if(m->set_step == 3){

@@ -38,7 +38,9 @@ int main(int argv, char *argc[]){
     STOP(m);
     */
     //delay(5000); 
-    for(int i = 0; i < 10000; i++){ 
+    BACKWARD(m);
+    //FORWARD(m);
+    for(int i = 0; i < 40000; i++){ 
         //printf("movendo\n");
         MOVE(m);
         //FORWARD(m);

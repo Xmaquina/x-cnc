@@ -18,7 +18,10 @@
 #include "../osmacros.h"
 #ifdef RASP_OS 
     #define MOVE(x) digitalWrite((x)->pin_step,HIGH); \
-                    digitalWrite((x)->pin_step,LOW);  
+                    digitalWrite((x)->pin_step,LOW); \
+                    delayMicroseconds(4); \
+                    digitalWrite((x)->pin_step,HIGH); \
+                    digitalWrite((x)->pin_step,LOW)
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 
     #define FORWARD(x) digitalWrite((x)->pin_direction, HIGH)
     #define BACKWARD(x) digitalWrite((x)->pin_direction, LOW)

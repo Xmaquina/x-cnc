@@ -68,7 +68,7 @@ int main (int argc, char *argv[]){
         printf("You have to allocated it\n");
     }
     setup_motor(m);
-    set_sixteenth_step(m);
+    //set_sixteenth_step(m);
     while (1){
       if ((rd = read (fd, ev, size * 64)) < size){
           perror_exit ("read()");      
@@ -80,10 +80,12 @@ int main (int argc, char *argv[]){
         if(ev[1].code == 106){
             FORWARD(m);
             MOVE(m);
+            delay(1);
         }
         if(ev[1].code == 105){
             BACKWARD(m);
             MOVE(m);
+            delay(1);
         }
         if(ev[1].code == 103){
             BACKWARD(m1);
