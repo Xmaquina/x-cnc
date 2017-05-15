@@ -36,6 +36,9 @@ $(TARGET): main.o $(MOTOR) $(MACROS)
 steptest: steptest.o $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS) -o $@ $^
 
+ctest: clocktest.o $(MOTOR) $(MACROS) 
+	$(CC) $(CFLAGS) -o $@ $^
+
 rtest: testreal.o $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS) -o $@ $^
 
@@ -54,6 +57,9 @@ main.o : main.c $(MOTOR) $(MACROS)
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 steptest.o : steptests.c $(MOTOR) $(MACROS) 
+	$(CC) $(CFLAGS)  -c -o $@ $<
+
+clocktest.o : clocktest.c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 testreal.o : testreal.c $(MOTOR) $(MACROS) 
