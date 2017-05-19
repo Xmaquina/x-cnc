@@ -11,6 +11,8 @@
     #define SACTIVE(x) (x)->state
     #define SREAD(x) *(x)->state = digitalRead((x)->pin) 
 #endif
+
+#define SREAD(x) (x)->state = digitalRead((x)->pin) 
 //const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};
 
 enum sensor_axis_{
@@ -35,6 +37,7 @@ int alloc_sensor(sensor **s);
 char * type_saxis(sensor *s);
 int print_sensor(sensor *s);
 int read_conf_sensor(sensor *s, int sensor);
+int setup_sensor(sensor *s);
 
 
 #endif

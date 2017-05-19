@@ -1,7 +1,7 @@
 #
 #   Makefile
 #
-WIRINGFLAG  = -l wiringPi
+WIRINGFLAG  = -lwiringPi
 UNAME       = $(shell uname)
 DISTRO      = $(shell lsb_release -si)
 CC          = gcc
@@ -37,8 +37,9 @@ $(TARGET): main.o $(SENSOR) $(MACROS) $(UTIL) $(TOKEN)
 $(UTIL): ../util/util.c ../util/util.h 
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(SENSOR) : sensor.c sensor.h ../xcncmacros.h
+$(SENSOR) : sensor.c sensor.h ../xcncmacros.h $(MACROS)
 	@echo $(MACROS)
+	@echo $^
 	$(CC) $(CFLAGS) -c -o $@ $< 
 
 main.o : main.c $(SENSOR) $(MACROS) 

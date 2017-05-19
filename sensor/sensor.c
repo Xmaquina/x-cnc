@@ -21,6 +21,13 @@ int alloc_sensor(sensor **s){
     return 0;   
 }
 
+int setup_sensor(sensor *s){
+    #ifdef RASP_OS 
+        pinMode(s->pin, INPUT);
+    #endif
+    return 0;
+
+}
 char * type_saxis(sensor *s){
     if(s->axis == SX_AXIS){
         return SCX_AXIS;
@@ -55,7 +62,6 @@ printf("filename %s\n", filename);
         exit (EXIT_FAILURE);
     }
     char buffer[255];
-    double angle = 0;
     int value = 0;
     fscanf(fp, "%s = %d", buffer, &value);
     if(strcmp(buffer, "pin") == 0){
