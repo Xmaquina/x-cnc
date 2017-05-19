@@ -17,9 +17,9 @@
 #define SET_STEP "set_step" 
 #include "../osmacros.h"
 #ifdef RASP_OS 
-    #define MOVE(x) digitalWrite((x)->pin_step,HIGH); \
+    #define MOVE(x) delayMicroseconds(5); \
+                    digitalWrite((x)->pin_step,HIGH); \
                     digitalWrite((x)->pin_step,LOW); \
-                    delayMicroseconds(4); \
                     digitalWrite((x)->pin_step,HIGH); \
                     digitalWrite((x)->pin_step,LOW)
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 
