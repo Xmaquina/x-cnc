@@ -8,17 +8,16 @@
 #define SCY_AXIS "Y_AXIS"
 #define SCZ_AXIS "Z_AXIS"
 #ifdef RASP_OS 
-    #define SACTIVE(x) (x)->state
-    #define SREAD(x) *(x)->state = digitalRead((x)->pin) 
+    #define SACTIVE(x) (x)->state == 0 ? 1 : 0
+    #define SREAD(x) (x)->state = digitalRead((x)->pin) 
 #endif
 
-#define SREAD(x) (x)->state = digitalRead((x)->pin) 
 //const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};
 
 enum sensor_axis_{
-    x_axis = SX_AXIS,
-    y_axis = SY_AXIS,
-    z_axis = SZ_AXIS
+    sx_axis = SX_AXIS,
+    sy_axis = SY_AXIS,
+    sz_axis = SZ_AXIS
 };
 
 

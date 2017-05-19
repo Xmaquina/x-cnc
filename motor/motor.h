@@ -69,6 +69,7 @@ int set_eighth_step(motor *m);
 int set_quarter_step(motor *m);
 int set_half_step(motor *m);
 int set_full_step(motor *m);
+int setup_step(motor *m, int step);
 int setup_motor(motor *m);
 int setdown_motor(motor *m);
 #endif

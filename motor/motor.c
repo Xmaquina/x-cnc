@@ -172,7 +172,26 @@ int set_full_step(motor *m){
 
 }
 
-
+int setup_step(motor *m, int step){
+    if(step == 1){
+        printf("PAssou aqui\n");
+        set_sixteenth_step(m);
+    }
+    if(step == 2){
+        printf("PAssou aqui 2\n");
+        set_eighth_step(m);
+    }
+    if(step == 3){
+        set_quarter_step(m);
+    }
+    if(step == 4){
+        set_half_step(m);
+    }
+    if(step == 5){
+        set_full_step(m);  
+    }
+    return 1;
+}
 int setup_motor(motor *m){
 #ifdef RASP_OS 
     pinMode(m->pin_step, OUTPUT);
