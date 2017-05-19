@@ -37,6 +37,8 @@ steptest: steptest.o $(MOTOR) $(MACROS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 ctest: clocktest.o $(MOTOR) $(MACROS) 
+	@echo $(DISTRO)
+	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
 
 rtest: testreal.o $(MOTOR) $(MACROS) 
@@ -60,6 +62,8 @@ steptest.o : steptests.c $(MOTOR) $(MACROS)
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 clocktest.o : clocktest.c $(MOTOR) $(MACROS) 
+	@echo $(DISTRO)
+	@echo $(R)
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 testreal.o : testreal.c $(MOTOR) $(MACROS) 
@@ -72,5 +76,5 @@ $(KTEST).o : $(KTEST).c $(MOTOR) $(MACROS)
 	$(CC) $(CFLAGS)  -c -o $@ $< -lrt
 
 clean:
-	rm *.o    
+	rm *.o ctest ktest dtest rtest    
 	rm $(TARGET)

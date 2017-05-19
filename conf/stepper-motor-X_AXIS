@@ -5,4 +5,4 @@ limit = 25
 ms1 = 0
 ms2 = 2
 ms3 = 3
-set_step = 1
+set_step = 3
