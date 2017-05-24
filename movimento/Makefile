@@ -34,6 +34,16 @@ $(TARGET): main.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
 
+test: testyvoltas.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
+	@echo $(DISTRO)
+	@echo $(R)
+	$(CC) $(CFLAGS) -o $@ $^
+
+dtest: testpulsos.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
+	@echo $(DISTRO)
+	@echo $(R)
+	$(CC) $(CFLAGS) -o $@ $^
+
 $(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
 	$(CC) $(CFLAGS) -c -o $@ $<
 
@@ -48,6 +58,12 @@ $(MOTOR) : ../motor/motor.c ../motor/motor.h ../xcncmacros.h $(MACROS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 main.o : main.c  
+	$(CC) $(CFLAGS)  -c -o $@ $<
+
+testyvoltas.o : testyvoltas.c  
+	$(CC) $(CFLAGS)  -c -o $@ $<
+
+testpulsos.o : testpulsos.c  
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 clean:
