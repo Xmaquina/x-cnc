@@ -40,7 +40,10 @@ def read_all_mails():
         if(mail != None):
             file_name = str(cont_mail+1) + ".gcode"
             file = open(file_name, "w")
-            file.write(mail)
+            try:
+                file.write(mail.decode())
+            except AttributeError:
+                file.write(mail)
             file.close()
             cont_mail = cont_mail + 1
         else:
