@@ -234,10 +234,17 @@ int setdown_motor(motor *m){
 }
 
 
-int move_motor(motor *m){
-#ifdef RASP_OS 
-    pinMode(17, OUTPUT);
-#endif
+int move_motor(motor *m, int direction, int voltas){
+    if(direction == 0){
+        BACKWARD(m);
+    }else{
+        FORWARD(m);
+    }
+printf("Voltas: %d\n", voltas);
+    for(int i = 0; i < voltas; i++){
+        MOVE(m);
+        delay(1);
+    }
     return 0;
     
 }

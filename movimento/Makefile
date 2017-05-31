@@ -44,6 +44,11 @@ dtest: testpulsos.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
 
+qtest: testq.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
+	@echo $(DISTRO)
+	@echo $(R)
+	$(CC) $(CFLAGS) -o $@ $^
+
 $(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
 	$(CC) $(CFLAGS) -c -o $@ $<
 
@@ -66,6 +71,9 @@ testyvoltas.o : testyvoltas.c
 testpulsos.o : testpulsos.c  
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
+testq.o : testq.c  
+	$(CC) $(CFLAGS)  -c -o $@ $<
+
 clean:
 	rm *.o     
-	rm $(TARGET)
+	rm $(TARGET) dtest qtest test

@@ -67,6 +67,16 @@ int mover_zero(motor *xm, motor *ym, sensor *sx, sensor *sy){
     setup_step(ym, ym->set_step);
     return 1;
 }
+
+int mover_motor_um_eixo(motor *m, double mm){
+    int direction = mm < 0 ? 1 : 0;
+printf("Direction %d\n", direction);
+    int voltas = mm >= 0 ? 1000 * mm: 1000 * mm * (-1);
+    move_motor(m,direction, voltas);
+    return 1;
+
+}
+
 void swap(double* a, double* b){
 printf("passou aqui\n"); 
     double temp = *(a);
