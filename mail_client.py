@@ -12,7 +12,7 @@ def do_login(server_connection):
     server_connection.pass_(emailPass)
 
 def read_mail_body(connection_loged, mail_id):
-    mail_body = connection_loged.retr(mail_id)[1][13]
+    mail_body = connection_loged.retr(mail_id)[1][76]
     return mail_body
 	
 def delete (connection_loged, mail_id):
