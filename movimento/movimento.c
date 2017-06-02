@@ -6,6 +6,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<math.h>
 #include "../token/token.h"
 
 #ifdef RASP_OS 
@@ -110,6 +111,43 @@ printf("voltas convertidas %d\n",voltas_convertidas);
         MOVE(m);
         MOVE(m1);
         delay(1);
+    }      
+    return 0;
+}
+
+int move_reta2(motor *m, motor *m1, double x, double y, double x1, double y1){
+    x > x1 ? FORWARD(m) : BACKWARD(m);
+    y > y1 ? FORWARD(m1) : BACKWARD(m1);
+    x > x1 ? swap(&x,&x1) : 0;
+printf("y %lf\n",y);
+printf("y1 %lf\n",y1);
+    y > y1 ? swap(&y,&y1) : 0;
+printf("x %lf y %lf x1 %lf y1 %lf\n", x, y, x1, y1);
+    double dy = y1 - y;
+    double dx = x1 - x;
+    int voltasx = dx * 1000;
+    int voltasy = dy * 1000;
+printf("Voltas x %d voltas y %d\n",voltasx, voltasy);
+    bresenham1(m, m1, 0, 0, voltasx, voltasy);      
+    return 0;
+}
+
+int move_circulo(motor *m, motor *m1, double x, double y, double r){
+    //x > x1 ? FORWARD(m) : BACKWARD(m);
+    //y > y1 ? FORWARD(m1) : BACKWARD(m1);
+    //x > x1 ? swap(&x,&x1) : 0;
+printf("x %lf\n",x);
+printf("y %lf\n",y);
+    double val = PI/180;
+    double x0, y0, x1, y1;
+    x0 = x + r * cos(0 * val);
+    y0 = y + r * sin(0 * val);
+    for(int i = 1; i <= 180; i++){  
+        x1 = x + r * cos(i * val);
+        y1 = y + r * sin(i * val);
+        move_reta2(m, m1, x0, y0, x1, y1);
+        x0 = x1;
+        y0 = y1;
     }      
     return 0;
 }

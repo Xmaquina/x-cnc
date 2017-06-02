@@ -281,6 +281,8 @@ printf("x2 %d\n",x2);
             }
             else{
               d += incNE;
+
+//printf("y no algoritmos %d\n",y);
               y += slope;
               MOVE(my);
               delay(1);

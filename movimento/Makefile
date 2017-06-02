@@ -1,7 +1,7 @@
 #
 #   Makefile
 #
-WIRINGFLAG  = -l wiringPi
+WIRINGFLAG  = -lwiringPi -lm 
 UNAME       = $(shell uname)
 DISTRO      = $(shell lsb_release -si)
 CC          = gcc
@@ -13,7 +13,7 @@ else
 endif
 
 ifeq ($(UNAME), Darwin)
-	CFLAGS=-g -Wall -std=c99
+	CFLAGS=-g -Wall -std=c99 
 else
 	CFLAGS=-g -Wall -std=c99 $(WIRINGFLAG) 
 endif
@@ -52,7 +52,7 @@ qtest: testq.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 ttest: testt.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(DISTRO)
 	@echo $(R)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(WIRINGFLAG) -o $@ $^ -lm
 
 $(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
 	$(CC) $(CFLAGS) -c -o $@ $<
@@ -61,7 +61,7 @@ $(UTIL): ../util/util.c ../util/util.h
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(MOVIMENTO).o : $(MOVIMENTO).c    
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< -lm
 
 $(MOTOR) : ../motor/motor.c ../motor/motor.h ../xcncmacros.h $(MACROS) 
 	@echo $(MACROS)
@@ -80,7 +80,7 @@ testq.o : testq.c
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 testt.o : testt.c  
-	$(CC) $(CFLAGS)  -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< -lm
 
 clean:
 	rm *.o     

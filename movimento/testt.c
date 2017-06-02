@@ -6,6 +6,7 @@
 #include "../osmacros.h"
 #include "movimento.h"
 #include <wiringPi.h>
+#include <math.h>
 
 
 int main(int argv, char *argc[]){
@@ -26,10 +27,13 @@ int main(int argv, char *argc[]){
     //mover_motor_um_eixo(m, 10);
     //mover_motor_um_eixo(m1, -10);
     //mover_motor_um_eixo(m, -10);
-    move_reta(m, m1, 2, 2, 8, 7);
-    move_reta(m, m1, 8, 7, 14, 2);
-
-    mover_motor_um_eixo(m, -12);
+    //move_reta2(m, m1, 2, 2, 8, 7);
+    //move_reta2(m, m1, 8, 7, 14, 2);
+    move_circulo(m, m1, 2, 3, 4);
+    move_circulo(m, m1, 2, 3, 4);
+    move_reta2(m, m1, 0, 0, 4, -8 * tan(45*(PI/180)));
+    move_reta2(m, m1, 0, 0, 4, 8 * tan(45*(PI/180)));
+    //mover_motor_um_eixo(m, 8);
     setdown_motor(m);
     setdown_motor(m1);
     free(m);
