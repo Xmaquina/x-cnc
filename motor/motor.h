@@ -72,4 +72,5 @@ int setup_step(motor *m, int step);
 int setup_motor(motor *m);
 int setdown_motor(motor *m);
 int move_motor(motor *m, int direction, int voltas);
+void bresenham1(motor *mx, motor *my, int x1, int y1, int x2, int y2);
 #endif

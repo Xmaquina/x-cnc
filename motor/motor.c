@@ -248,3 +248,42 @@ printf("Voltas: %d\n", voltas);
     return 0;
     
 }
+
+void bresenham1(motor *mx, motor *my, int x1, int y1, int x2, int y2){        
+        int slope;
+        int dx, dy, incE, incNE, d, x, y;
+        // Onde inverte a linha x1 > x2       
+        if (x1 > x2){
+            bresenham1(mx, my, x2, y2, x1, y1);
+             return;
+        }        
+        dx = x2 - x1;
+        dy = y2 - y1;
+    
+        if (dy < 0){            
+            slope = -1;
+            dy = -dy;
+        }
+        else{            
+           slope = 1;
+        }
+        // Constante de Bresenham
+        incE = 2 * dy;
+        incNE = 2 * dy - 2 * dx;
+        d = 2 * dy - dx;
+        y = y1;       
+printf("x2 %d\n",x2);
+        for (x = x1; x <= x2; x++){
+            MOVE(mx);
+            delay(1);
+            if (d <= 0){
+              d += incE;
+            }
+            else{
+              d += incNE;
+              y += slope;
+              MOVE(my);
+              delay(1);
+            }
+        }
+  }

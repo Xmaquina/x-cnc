@@ -104,7 +104,7 @@ printf("x %lf\n",x);
 printf("x1 %lf\n",x1);
 printf("y %lf\n",y);
 printf("y1 %lf\n",y1);
-    int voltas_convertidas = voltas * 100000;
+    int voltas_convertidas = voltas * 1000;
 printf("voltas convertidas %d\n",voltas_convertidas);
     for(int i = 0; i < voltas_convertidas; i++){
         MOVE(m);

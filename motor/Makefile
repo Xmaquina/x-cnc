@@ -69,11 +69,20 @@ clocktest.o : clocktest.c $(MOTOR) $(MACROS)
 testreal.o : testreal.c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
+testreta.o : testreta.c 
+	$(CC) $(CFLAGS)  -c -o $@ $<
+
 $(DTEST).o : $(DTEST).c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 $(KTEST).o : $(KTEST).c $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS)  -c -o $@ $< -lrt
+
+ttest: testreta.o $(MOTOR) $(MACROS)
+	@echo $(DISTRO)
+	@echo $(R)
+	$(CC) $(CFLAGS) -o $@ $^
+
 
 clean:
 	rm *.o ctest ktest dtest rtest    
