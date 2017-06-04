@@ -1,10 +1,11 @@
 #
 #   Makefile
 #
-WIRINGFLAG  = -l wiringPi
-UNAME       = $(shell uname)
-DISTRO      = $(shell lsb_release -si)
-CC          = gcc
+WIRINGFLAG    = -l wiringPi
+UNAME         = $(shell uname)
+DISTRO        = $(shell lsb_release -si)
+CC            = gcc
+DIRSENSOR     = ../sensor
 
 ifeq ($(DISTRO), Ubuntu)
 	R=$(shell sed -i 's/RASP_OS/OTHERS/g' '../osmacros.h')
@@ -24,11 +25,12 @@ MAIN       = main.c
 MOTOR      = motor.o 
 DTEST      = directiontest
 KTEST      = keytest
-
+SENSOR     = sensor
+UTIL       = util.o
 all = $(TARGET)
 
 
-$(TARGET): main.o $(MOTOR) $(MACROS) 
+$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR).o $(UTIL) 
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
@@ -53,6 +55,12 @@ ktest: $(KTEST).o $(MOTOR) $(MACROS)
 
 $(MOTOR) : motor.c motor.h ../xcncmacros.h $(MACROS) 
 	@echo $(MACROS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(UTIL): ../util/util.c ../util/util.h 
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 main.o : main.c $(MOTOR) $(MACROS) 

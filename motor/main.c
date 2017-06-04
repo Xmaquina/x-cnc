@@ -22,12 +22,9 @@ printf("Motes %d\n", mot);
     wiringPiSetup();
     #endif    
     motor *m, *m1, *m2;
-    alloc_motor(&m);
-    alloc_motor(&m1);
-    alloc_motor(&m2);
-    read_conf(m, X_AXIS);
-    read_conf(m1, Y_AXIS);
-    read_conf(m2, Z_AXIS);
+    m = get_motor(x_axis);
+    m1 = get_motor(y_axis);
+    m2 = get_motor(z_axis);
     if(m == NULL){
         printf("You have to allocated it\n");
     }
@@ -36,22 +33,7 @@ printf("Motes %d\n", mot);
     setup_motor(m);
     setup_motor(m1);
     setup_motor(m2);
-    //set_eighth_step(m);
-     /*
-    for(int i = 0; i < 10; i++){
-        printf("Pinos sendo ativado\n");
-        MOVE(m);
-        STOP(m1);
-        delay(700);
-        printf("Pinos sendo desativado\n");
-        STOP(m);
-        MOVE(m1);
-        delay(700);
-    }
-    //STOP(m1);
-    STOP(m);
-    */
-    //delay(5000); 
+    
     if(direcao == 1){
         BACKWARD(m);
     }else{

@@ -16,6 +16,8 @@
 #define MS3 "ms3" 
 #define SET_STEP "set_step" 
 #include "../osmacros.h"
+#include "../sensor/sensor.h"
+
 #ifdef RASP_OS 
     #define MOVE(x) delayMicroseconds(5); \
                     digitalWrite((x)->pin_step,HIGH); \
@@ -53,6 +55,7 @@ struct motor_{
     int pin_ms2;
     int pin_ms3;
     int set_step;
+    sensor *s;
     
  
 };
@@ -73,4 +76,5 @@ int setup_motor(motor *m);
 int setdown_motor(motor *m);
 int move_motor(motor *m, int direction, int voltas);
 void bresenham1(motor *mx, motor *my, int x1, int y1, int x2, int y2);
+motor* get_motor(motor_axis axis);
 #endif

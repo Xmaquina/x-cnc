@@ -289,3 +289,31 @@ printf("x2 %d\n",x2);
             }
         }
   }
+
+motor* get_motor(motor_axis axis){
+    motor *m;
+    alloc_motor(&m);
+    if(m == NULL){
+        exit(1);
+    }
+    alloc_sensor(&m->s);
+    if(m->s == NULL){
+        exit(1);
+    }
+    if(axis == x_axis){
+        read_conf(m, X_AXIS);
+        read_conf_sensor(m->s, SX_AXIS);
+    }
+    if(axis == y_axis){
+        read_conf(m, Y_AXIS);
+        read_conf_sensor(m->s, SY_AXIS);
+    }
+    if(axis == z_axis){
+        read_conf(m, Z_AXIS);
+        read_conf_sensor(m->s, SZ_AXIS);
+    }
+    return m;
+}
+
+
+    
