@@ -29,10 +29,16 @@ int main(int argv, char *argc[]){
     //mover_motor_um_eixo(m, -10);
     //move_reta2(m, m1, 2, 2, 8, 7);
     //move_reta2(m, m1, 8, 7, 14, 2);
-    move_circulo(m, m1, 2, 3, 4);
-    move_circulo(m, m1, 2, 3, 4);
-    move_reta2(m, m1, 0, 0, 4, -8 * tan(45*(PI/180)));
-    move_reta2(m, m1, 0, 0, 4, 8 * tan(45*(PI/180)));
+    //move_circulo_eixoy(m, m1, 2, 3, 4);
+    //coracao
+        
+        move_circulo(m, m1, 2, 3, 4);
+        move_circulo(m, m1, 2, 3, 4);
+        move_reta2(m, m1, 0, 0, 8, -8 * tan(45*(PI/180)));
+        move_reta2(m, m1, 0, 0, 8, 8 * tan(45*(PI/180)));
+        
+    
+     //move_reta2(m1, m, 0, 0, -8, -8 * tan(45*(PI/180)));
     //mover_motor_um_eixo(m, 8);
     setdown_motor(m);
     setdown_motor(m1);

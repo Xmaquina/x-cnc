@@ -12,4 +12,5 @@ int move_reta(motor *m, motor *m1, double x, double y, double x1, double y1);
 int mover_motor_um_eixo(motor *m, double mm);
 int move_reta2(motor *m, motor *m1, double x, double y, double x1, double y1);
 int move_circulo(motor *m, motor *m1, double x, double y, double r);
+int move_circulo_eixoy(motor *m, motor *m1, double x, double y, double r);
 #endif

@@ -14,16 +14,20 @@ printf("A direcao %d\n", direcao);
 printf("A qtde %d\n", qtde);
     int direcao2 = atoi(argc[3]);
 printf("A direcao2 %d\n", direcao);
-    int mot = atoi(argc[4]);
+    int direcao3 = atoi(argc[4]);
+printf("A direcao3 %d\n", direcao);
+    int mot = atoi(argc[5]);
 printf("Motes %d\n", mot);
     #ifdef RASP_OS
     wiringPiSetup();
     #endif    
-    motor *m, *m1;
+    motor *m, *m1, *m2;
     alloc_motor(&m);
     alloc_motor(&m1);
+    alloc_motor(&m2);
     read_conf(m, X_AXIS);
     read_conf(m1, Y_AXIS);
+    read_conf(m2, Z_AXIS);
     if(m == NULL){
         printf("You have to allocated it\n");
     }
@@ -31,6 +35,7 @@ printf("Motes %d\n", mot);
     //printf("Pit step: %d\n", m1->pin_step);
     setup_motor(m);
     setup_motor(m1);
+    setup_motor(m2);
     //set_eighth_step(m);
      /*
     for(int i = 0; i < 10; i++){
@@ -57,6 +62,11 @@ printf("Motes %d\n", mot);
     }else{
         FORWARD(m1);
     }
+    if(direcao3 == 1){
+        BACKWARD(m2);
+    }else{
+        FORWARD(m2);
+    }
     for(int i = 0; i < qtde; i++){ 
         //printf("movendo\n");
         if(mot == 1){
@@ -66,13 +76,14 @@ printf("Motes %d\n", mot);
         }else if(mot == 3){
             MOVE(m);
             MOVE(m1);
+        }else if(mot == 4){
+            MOVE(m);
+            MOVE(m1);
+            MOVE(m2);
+        }else if(mot == 5){
+            MOVE(m2);
         }
-        //FORWARD(m);
         delay(1);
-        //printf("Indo pra tras\n");
-        //BACKWARD(m);
-        //printf("Parado:\n");
-        //delay(2);
     }
     setdown_motor(m);
     setdown_motor(m1);

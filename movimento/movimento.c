@@ -151,3 +151,23 @@ printf("y %lf\n",y);
     }      
     return 0;
 }
+
+int move_circulo_eixoy(motor *m, motor *m1, double x, double y, double r){
+    //x > x1 ? FORWARD(m) : BACKWARD(m);
+    //y > y1 ? FORWARD(m1) : BACKWARD(m1);
+    //x > x1 ? swap(&x,&x1) : 0;
+printf("x %lf\n",x);
+printf("y %lf\n",y);
+    double val = PI/180;
+    double x0, y0, x1, y1;
+    x0 = x + r * cos(0 * val);
+    y0 = y + r * sin(0 * val);
+    for(int i = 1; i <= 180; i++){  
+        x1 = x + r * cos(i * val);
+        y1 = y + r * sin(i * val);
+        move_reta2(m1, m, x0, y0, x1, y1);
+        x0 = x1;
+        y0 = y1;
+    }      
+    return 0;
+}
