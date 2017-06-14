@@ -19,8 +19,7 @@
 #include "../sensor/sensor.h"
 
 #ifdef RASP_OS 
-    #define MOVE(x) delayMicroseconds(5); \
-                    digitalWrite((x)->pin_step,HIGH); \
+    #define MOVE(x) digitalWrite((x)->pin_step,HIGH); \
                     digitalWrite((x)->pin_step,LOW); \
                     digitalWrite((x)->pin_step,HIGH); \
                     digitalWrite((x)->pin_step,LOW)

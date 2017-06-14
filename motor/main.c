@@ -65,7 +65,9 @@ printf("Motes %d\n", mot);
         }else if(mot == 5){
             MOVE(m2);
         }
-        delay(1);
+       //delayMicroseconds(50);
+       //delay(1000);   
+        
     }
     setdown_motor(m);
     setdown_motor(m1);

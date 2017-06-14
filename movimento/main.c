@@ -27,7 +27,7 @@ int main(int argv, char *argc[]){
     }
     setup_motor(m);
     setup_motor(m1);
-    mover_zero(m, m1, s, s1);   
+    mover_para_ponto_zero(m1);   
     setdown_motor(m);
     setdown_motor(m1);
     free(m);

@@ -34,7 +34,7 @@ int mover_para_ponto_zero(motor *m){
         }
         MOVE(m);
         i++;
-        delay(1);
+        //delay(1);
     }
     printf("Voltas:%d ", i);
     setup_step(m, m->set_step);
