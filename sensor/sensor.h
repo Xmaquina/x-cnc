@@ -10,6 +10,9 @@
 #ifdef RASP_OS 
     #define SACTIVE(x) (x)->state == 0 ? 1 : 0
     #define SREAD(x) (x)->state = digitalRead((x)->pin) 
+#else 
+    #define SACTIVE(x) (x)->state == 0 ? 1 : 0
+    #define SREAD(x) (x)->state = 1
 #endif
 
 //const char *properties[4] = {ANGLE, DIRECTION, STEP, LIMIT};

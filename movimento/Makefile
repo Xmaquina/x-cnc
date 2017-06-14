@@ -32,7 +32,7 @@ all = $(TARGET)
 $(TARGET): main.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(DISTRO)
 	@echo $(R)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ -lm
 
 test: testyvoltas.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(DISTRO)

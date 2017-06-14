@@ -12,7 +12,9 @@
 
 
 int main(int argv, char *argc[]){
+    #ifdef RASP_OS
     wiringPiSetup();
+    #endif
     cnc *c;
     alloc_cnc(&c);
     if(c == NULL){

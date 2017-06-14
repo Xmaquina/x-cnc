@@ -51,7 +51,9 @@ int mover_para_ponto_zero(motor *m){
         }
         MOVE(m);
         i++;
+        #ifdef RASP_OS 
         //delay(1);
+        #endif
     }
     printf("Voltas:%d ", i);
     setup_step(m, m->set_step);
@@ -72,11 +74,15 @@ int mover_zero(motor *xm, motor *ym, sensor *sx, sensor *sy){
         }
         if(!SACTIVE(sx)){
             MOVE(xm);
+            #ifdef RASP_OS 
             delay(1);
+            #endif
         }
         if(!SACTIVE(sy)){
             MOVE(ym);
+            #ifdef RASP_OS 
             delay(1);
+            #endif
         }
         i++;
     }
@@ -127,7 +133,9 @@ printf("voltas convertidas %d\n",voltas_convertidas);
     for(int i = 0; i < voltas_convertidas; i++){
         MOVE(m);
         MOVE(m1);
+        #ifdef RASP_OS 
         delay(1);
+        #endif
     }      
     return 0;
 }
