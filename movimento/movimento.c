@@ -1,5 +1,7 @@
 #include "movimento.h"
 #include "../motor/motor.h"
+#include "../laser/laser.h"
+#include "../fresa/fresa.h"
 #include "../sensor/sensor.h"
 #include "../xcncmacros.h"
 #include "../osmacros.h"
@@ -25,6 +27,10 @@ int alloc_cnc(cnc **c){
 }
 
 int read_cnc(cnc *c){
+    alloc_laser(&c->l);
+    alloc_fresa(&c->f);
+    read_conf_fresa(c->f);
+    read_conf_laser(c->l);
     c->xm = get_motor(x_axis);
     c->ym = get_motor(y_axis);
     c->zm = get_motor(z_axis);

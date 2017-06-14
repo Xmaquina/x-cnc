@@ -26,10 +26,13 @@ SENSOR        = sensor
 DIRSENSOR     = ../sensor
 MOVIMENTO     = movimento
 UTIL          = util.o
+FRESA         = fresa.o
+LASER         = laser.o
+
 all = $(TARGET)
 
 
-$(TARGET): main.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
+$(TARGET): main.o $(MOTOR) $(MACROS) sensor.o movimento.o $(FRESA) $(LASER) $(UTIL)
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^ -lm
@@ -53,6 +56,16 @@ ttest: testt.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) $(WIRINGFLAG) -o $@ $^ -lm
+
+$(FRESA) : ../fresa/fresa.c 
+	@echo $(MACROS)
+	@echo $^
+	$(CC) $(CFLAGS) -c -o $@ $< 
+
+$(LASER) : ../laser/laser.c 
+	@echo $(MACROS)
+	@echo $^
+	$(CC) $(CFLAGS) -c -o $@ $< 
 
 $(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
 	$(CC) $(CFLAGS) -c -o $@ $<

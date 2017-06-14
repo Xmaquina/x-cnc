@@ -3,6 +3,8 @@
 
 #define PI 3.14159265
 #include "../motor/motor.h"
+#include "../fresa/fresa.h"
+#include "../laser/laser.h"
 #include "../sensor/sensor.h"
 #include "../osmacros.h"
 
@@ -16,6 +18,8 @@ struct cnc_{
     motor *xm;
     motor *ym;
     motor *zm;
+    laser *l;
+    fresa *f;
 };
 
 typedef struct ponto_ ponto;

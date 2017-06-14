@@ -60,6 +60,7 @@ int motor_file_exists(motor *m){
 }
 
 int print_motor(motor *m){
+    printf("Motor\n");
     printf("Angle: %lf\n", m->step);
     printf("Pin direction: %d\n", m->pin_direction );
     printf("Pin Step: %d\n", m->pin_step );

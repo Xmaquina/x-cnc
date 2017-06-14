@@ -17,6 +17,7 @@ int main(int argv, char *argc[]){
     #endif
     cnc *c;
     alloc_cnc(&c);
+    read_cnc(c);
     if(c == NULL){
         fprintf(stderr, "It cannot allocated cnc structure because of %s\n",
             strerror(errno));
