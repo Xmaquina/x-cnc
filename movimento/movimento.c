@@ -12,7 +12,24 @@
 #ifdef RASP_OS 
     #include<wiringPi.h>
 #endif
-#include <errno.h>
+#include<errno.h>
+
+int alloc_cnc(cnc **c){
+    *c = (cnc *)malloc(sizeof(cnc));
+    if(*c == NULL){
+        fprintf(stderr, "It cannot alloccate motor structure because %s\n",
+                strerror(errno));    
+        return 1;
+    }
+    return 0;   
+}
+
+int read_cnc(cnc *c){
+    c->xm = get_motor(x_axis);
+    c->ym = get_motor(y_axis);
+    c->zm = get_motor(z_axis);
+    return 1;
+}
 
 int mover_para_ponto_zero(motor *m){
     sensor *s;

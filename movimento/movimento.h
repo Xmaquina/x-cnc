@@ -6,6 +6,23 @@
 #include "../sensor/sensor.h"
 #include "../osmacros.h"
 
+struct ponto_{
+    double x;
+    double y;
+    double z;
+};
+
+struct cnc_{
+    motor *xm;
+    motor *ym;
+    motor *zm;
+};
+
+typedef struct ponto_ ponto;
+typedef struct cnc_ cnc;
+
+int alloc_cnc(cnc **c);
+int read_cnc(cnc *c);
 int mover_para_ponto_zero(motor *m);
 int mover_zero(motor *xm, motor *ym, sensor *sx, sensor *sy);
 int move_reta(motor *m, motor *m1, double x, double y, double x1, double y1);

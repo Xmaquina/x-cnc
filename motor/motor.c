@@ -14,7 +14,7 @@
 int alloc_motor(motor **m){
     *m = (motor *)malloc(sizeof(motor));
     if(*m == NULL){
-        fprintf(stderr, "It cannot alloccate motor structure because %sn",
+        fprintf(stderr, "It cannot alloccate motor structure because %s\n",
                 strerror(errno)); 
         return 1;
     }
