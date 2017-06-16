@@ -68,7 +68,10 @@ printf("Motes %d\n", mot);
             MOVE(m2);
         }
        //delayMicroseconds(50);
-       delay(1);   
+       #ifdef RASP_OS
+        delay(1); 
+       #endif 
+   
         
     }
     setdown_motor(m);

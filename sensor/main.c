@@ -7,19 +7,22 @@
     #include <wiringPi.h>
 #endif
 
-#include <wiringPi.h>
 
 int main(int argv, char *argc[]){
     sensor *s;
     alloc_sensor(&s);
     read_conf_sensor(s, SX_AXIS);
     setup_sensor(s);
-    wiringPiSetup();
+    #ifdef RASP_OS
+        wiringPiSetup();
+    #endif
     while(1){
         SREAD(s);
         //int d = digitalRead(s->pin);
 printf("The state %d\n", s->state);
-        delay(1);
+        #ifdef RASP_OS
+            delay(1);
+        #endif
     }
     printf("Deu certo\n");
     free(s);

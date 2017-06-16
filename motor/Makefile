@@ -2,35 +2,19 @@
 #   Makefile
 #
 WIRINGFLAG    = -l wiringPi
-UNAME         = $(shell uname)
-DISTRO        = $(shell lsb_release -si)
 CC            = gcc
-DIRSENSOR     = ../sensor
 
-ifeq ($(DISTRO), Ubuntu)
-	R=$(shell sed -i 's/RASP_OS/OTHERS/g' '../osmacros.h')
-else
-	R=$(shell sed -i 's/OTHERS/RASP_OS/g' '../osmacros.h')
-endif
 
-ifeq ($(UNAME), Darwin)
-	CFLAGS=-g -Wall -std=c99
-else
-	CFLAGS=-g -Wall -std=c99 $(WIRINGFLAG) 
-endif
 
 
 TARGET     = prog
 MAIN       = main.c
-MOTOR      = motor.o 
-DTEST      = directiontest
-KTEST      = keytest
-SENSOR     = sensor
-UTIL       = util.o
-all = $(TARGET)
 
+.DEFAULT_GOAL := $(TARGET)
 
-$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR).o $(UTIL) 
+include ../Makefile.conf
+
+$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR) $(UTIL) 
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
@@ -52,18 +36,7 @@ dtest: $(DTEST).o $(MOTOR) $(MACROS)
 ktest: $(KTEST).o $(MOTOR) $(MACROS) 
 	$(CC) $(CFLAGS) -o $@ $^ -lrt
 
-
-$(MOTOR) : motor.c motor.h ../xcncmacros.h $(MACROS) 
-	@echo $(MACROS)
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-$(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-$(UTIL): ../util/util.c ../util/util.h 
-	$(CC) $(CFLAGS) -c -o $@ $<
-
-main.o : main.c $(MOTOR) $(MACROS) 
+main.o : main.c  
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 steptest.o : steptests.c $(MOTOR) $(MACROS) 
@@ -90,7 +63,6 @@ ttest: testreta.o $(MOTOR) $(MACROS)
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
-
 
 clean:
 	rm *.o ctest ktest dtest rtest    
