@@ -23,7 +23,9 @@ printf("A qtde: %d\n", qtde);
     LASERON(l);
     for(int i = 0; i < qtde; i++){
         //printf("nada\n");
+        #ifdef RASP_OS
         delay(1);
+        #endif
     } 
     LASEROFF(l);
     printf("Deu certo\n");

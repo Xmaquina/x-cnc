@@ -5,6 +5,7 @@
 #include <string.h>
 #include "../osmacros.h"
 #include "movimento.h"
+#include "cnc.h"
 #include <errno.h>
 #ifdef RASP_OS
     #include <wiringPi.h>

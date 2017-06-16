@@ -18,13 +18,21 @@ else
 	CFLAGS=-g -Wall -std=c99 $(WIRINGFLAG) 
 endif
 
+DIRSENSOR     = ../sensor
+DIRLASER      = ../laser
+DIRFRESA      = ../fresa
+DIRTOKEN      = ../token
+DIRMOTOR      = ../motor
+DIRUTIL       = ../util
+DIRGCODE      = ../gcode
+DIRCONF       = ../conf
 
 TARGET        = prog
 MAIN          = main.c
 MOTOR         = motor.o 
 SENSOR        = sensor
-DIRSENSOR     = ../sensor
 MOVIMENTO     = movimento
+CNC           = cnc.o
 UTIL          = util.o
 FRESA         = fresa.o
 LASER         = laser.o
@@ -32,7 +40,7 @@ LASER         = laser.o
 all = $(TARGET)
 
 
-$(TARGET): main.o $(MOTOR) $(MACROS) sensor.o movimento.o $(FRESA) $(LASER) $(UTIL)
+$(TARGET): main.o $(MOTOR) $(MACROS) sensor.o movimento.o $(FRESA) $(LASER) $(UTIL) $(CNC) 
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^ -lm
@@ -70,13 +78,16 @@ $(LASER) : ../laser/laser.c
 $(SENSOR).o : $(DIRSENSOR)/$(SENSOR).c    
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(UTIL): ../util/util.c ../util/util.h 
+$(UTIL): ../util/util.c  
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(MOVIMENTO).o : $(MOVIMENTO).c    
 	$(CC) $(CFLAGS) -c -o $@ $< -lm
 
-$(MOTOR) : ../motor/motor.c ../motor/motor.h ../xcncmacros.h $(MACROS) 
+$(CNC) : cnc.c    
+	$(CC) $(CFLAGS) -c -o $@ $< -lm
+
+$(MOTOR) : ../motor/motor.c 
 	@echo $(MACROS)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
@@ -94,6 +105,9 @@ testq.o : testq.c
 
 testt.o : testt.c  
 	$(CC) $(CFLAGS) -c -o $@ $< -lm
+
+clear:
+	rm *.o
 
 clean:
 	rm *.o     

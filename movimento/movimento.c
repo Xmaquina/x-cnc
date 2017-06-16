@@ -1,4 +1,5 @@
 #include "movimento.h"
+#include "cnc.h"
 #include "../motor/motor.h"
 #include "../laser/laser.h"
 #include "../fresa/fresa.h"
@@ -15,27 +16,6 @@
     #include<wiringPi.h>
 #endif
 #include<errno.h>
-
-int alloc_cnc(cnc **c){
-    *c = (cnc *)malloc(sizeof(cnc));
-    if(*c == NULL){
-        fprintf(stderr, "It cannot alloccate motor structure because %s\n",
-                strerror(errno));    
-        return 1;
-    }
-    return 0;   
-}
-
-int read_cnc(cnc *c){
-    alloc_laser(&c->l);
-    alloc_fresa(&c->f);
-    read_conf_fresa(c->f);
-    read_conf_laser(c->l);
-    c->xm = get_motor(x_axis);
-    c->ym = get_motor(y_axis);
-    c->zm = get_motor(z_axis);
-    return 1;
-}
 
 int mover_para_ponto_zero(motor *m){
     sensor *s;
@@ -64,6 +44,40 @@ int mover_para_ponto_zero(motor *m){
     printf("Voltas:%d ", i);
     setup_step(m, m->set_step);
     return 1;
+}
+
+int mover_zero_cnc(cnc *c){
+    FORWARD(c->ym);
+    FORWARD(c->xm);
+    FORWARD(c->zm);
+    while(1){
+        SREAD(c->ym->s);
+        SREAD(c->zm->s);
+        SREAD(c->xm->s);
+        if(SACTIVE(c->ym->s) && SACTIVE(c->zm->s) && SACTIVE(c->xm->s)){
+          break;
+        }
+        if(!SACTIVE(c->ym->s)){
+            MOVE(c->ym);
+            #ifdef RASP_OS 
+            delay(1);
+            #endif
+        }
+        if(!SACTIVE(c->zm->s)){
+            MOVE(c->zm);
+            #ifdef RASP_OS 
+            delay(1);
+            #endif
+        }
+        if(!SACTIVE(c->xm->s)){
+            MOVE(c->xm);
+            #ifdef RASP_OS 
+            delay(1);
+            #endif
+        }
+    }
+    return 1;
+    
 }
 
 int mover_zero(motor *xm, motor *ym, sensor *sx, sensor *sy){
