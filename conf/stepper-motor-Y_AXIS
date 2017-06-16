@@ -1,6 +1,6 @@
 angle = 1.9
-direction = 8
-step = 9
+direction = 0
+step = 2
 limit = 25
 ms1 = 11
 ms2 = 11

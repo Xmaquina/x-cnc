@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include "../osmacros.h"
 #include "laser.h"
 #include "../token/token.h"
 #include <string.h>
@@ -21,7 +22,8 @@ printf("A qtde: %d\n", qtde);
     read_conf_laser(l);
     LASERON(l);
     for(int i = 0; i < qtde; i++){
-        printf("nada\n");
+        //printf("nada\n");
+        delay(1);
     } 
     LASEROFF(l);
     printf("Deu certo\n");

@@ -21,6 +21,7 @@
 #ifdef RASP_OS 
     #define MOVE(x) digitalWrite((x)->pin_step,HIGH); \
                     digitalWrite((x)->pin_step,LOW); \
+                    delay(1); \
                     digitalWrite((x)->pin_step,HIGH); \
                     digitalWrite((x)->pin_step,LOW)
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 

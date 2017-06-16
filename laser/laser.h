@@ -4,13 +4,13 @@
 
 #ifdef RASP_OS 
     #define LACTIVE(x) (x)->state == 1 ? 1 : 0
+    #define LASEROFF(x) digitalWrite((x)->pin, LOW);\
+                       (x)->state = 0
     #define LASERON(x) digitalWrite((x)->pin, HIGH);\
                        (x)->state = 1
-                         
-    #define LASEROFF(x) digitalWrite((x)->pin, LOW);(x)->state = 0
 #else 
     #define LACTIVE(x) (x)->state == 1 ? 1 : 0
-    #define LASERON(x) (x)->state = 1
+    #define LASERON(x) (x)->state = 1; printf("deu\n")
     #define LASEROFF(x) (x)->state = 0 
 #endif
 

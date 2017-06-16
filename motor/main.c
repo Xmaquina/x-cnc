@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "motor.h"
 #include <string.h>
+#include "../osmacros.h"
 #ifdef RASP_OS
     #include <wiringPi.h>
 #endif
@@ -55,6 +56,7 @@ printf("Motes %d\n", mot);
             MOVE(m);
         }else if(mot == 2){
             MOVE(m1);
+            //delay(1);
         }else if(mot == 3){
             MOVE(m);
             MOVE(m1);
@@ -66,7 +68,7 @@ printf("Motes %d\n", mot);
             MOVE(m2);
         }
        //delayMicroseconds(50);
-       //delay(1000);   
+       delay(1);   
         
     }
     setdown_motor(m);
