@@ -4,6 +4,7 @@
 #include "../laser/laser.h"
 #include "../fresa/fresa.h"
 #include "../sensor/sensor.h"
+#include "../gcode/gcode.h"
 #include "../xcncmacros.h"
 #include "../osmacros.h"
 #include<stdio.h>
@@ -80,6 +81,26 @@ int mover_zero_cnc(cnc *c){
     
 }
 
+
+
+int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
+    if(isG00(g) && !isG00(bg)){
+        BACKWARD(c->zm);
+        for(int i = 0; i<10000; i++){
+            MOVE(c->zm);
+        }
+    }else if(!isG00(g) && isG00(bg)){
+        FORWARD(c->zm);
+        for(int i = 0; i<10000; i++){
+            MOVE(c->zm);
+        }
+    }    
+    if(isG00(g) || isG01(g)){ 
+        move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
+    }        
+    return 1;
+
+}
 int mover_zero(motor *xm, motor *ym, sensor *sx, sensor *sy){
     FORWARD(xm);
     FORWARD(ym);

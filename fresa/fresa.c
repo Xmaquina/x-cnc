@@ -28,7 +28,7 @@ int print_fresa(fresa *f){
 int read_conf_fresa(fresa *f){
     if(f == NULL){ exit(EXIT_FAILURE); };
     FILE *fp;
-    char *filename = "../conf/fresa";
+    char *filename = file_name(CONFDIR,"fresa");
 printf("filename %s\n", filename);
     if(file_exists(filename)){
         fp = fopen(filename, "r");
@@ -36,7 +36,7 @@ printf("filename %s\n", filename);
         exit(EXIT_FAILURE); 
     }
     if(fp == NULL){
-        fprintf (stderr, "Couldn't open file conf/sensor; %s\n",
+        fprintf (stderr, "Couldn't open file conf/fresa; %s\n",
                  strerror (errno));
         exit (EXIT_FAILURE);
     }

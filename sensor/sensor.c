@@ -49,7 +49,7 @@ int read_conf_sensor(sensor *s, int sensor){
     if(s == NULL){ exit(EXIT_FAILURE); };
     s->axis = sensor;
     FILE *fp;
-    char *filename = file_name("../conf/sensor-", type_saxis(s));
+    char *filename = file_name(file_name(CONFDIR,"sensor-"), type_saxis(s));
 printf("filename %s\n", filename);
     if(file_exists(filename)){
         fp = fopen(filename, "r");

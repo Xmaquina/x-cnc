@@ -28,7 +28,7 @@ int print_laser(laser *l){
 int read_conf_laser(laser *l){
     if(l == NULL){ exit(EXIT_FAILURE); };
     FILE *fp;
-    char *filename = "../conf/laser";
+    char *filename = file_name(CONFDIR,"laser");
 printf("filename %s\n", filename);
     if(file_exists(filename)){
         fp = fopen(filename, "r");

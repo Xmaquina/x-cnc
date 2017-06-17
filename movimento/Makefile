@@ -10,7 +10,7 @@ TARGET = prog
 
 include ../Makefile.conf
 
-$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(UTIL) $(CNC) 
+$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(UTIL) $(CNC) $(GCODE) $(TOKEN) 
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^ -lm

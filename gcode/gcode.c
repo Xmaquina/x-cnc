@@ -133,16 +133,20 @@ int read_gcodefile(char *file_name, gc_list *gl){
 }
 
 
-int make_line_opencv(double *x0, double y0, double *x1, double *y1){
-    double dx = *(x1) - *(x0);
-    double dy = *(y1) - y0;
-    double steps = 0;
-    if (abs(dx) > abs(dy)){
-        steps = abs(dx);
-    }else{
-        steps = abs(dy);
-    }
-    
 
+
+int isG01(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G01) == 0){
+        return 1;
+    }
     return 0;
 }
+int isG00(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G00) == 0){
+        return 1;
+    }
+    return 0;
+}
+

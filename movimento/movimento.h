@@ -6,6 +6,7 @@
 #include "../fresa/fresa.h"
 #include "../laser/laser.h"
 #include "../sensor/sensor.h"
+#include "../gcode/gcode.h"
 #include "../osmacros.h"
 #include "cnc.h"
 
@@ -27,4 +28,5 @@ int move_reta2(motor *m, motor *m1, double x, double y, double x1, double y1);
 int move_circulo(motor *m, motor *m1, double x, double y, double r);
 int move_circulo_eixoy(motor *m, motor *m1, double x, double y, double r);
 int mover_zero_cnc(cnc *c);
+int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p);
 #endif
