@@ -15,14 +15,14 @@ int main(int argv, char *argc[]){
     motor *m, *m1;
     alloc_motor(&m);
     alloc_motor(&m1);
-    read_conf(m, X_AXIS);
-    read_conf(m1, Y_AXIS);
+    read_conf(m, Z_AXIS);
+    //read_conf(m1, Y_AXIS);
     if(m == NULL){
         printf("You have to allocated it\n");
     }
     setup_motor(m);
-    setup_motor(m1);
-    mover_para_ponto_zero(m1);   
+    //setup_motor(m1);
+    //mover_para_ponto_zero(m1);   
     mover_para_ponto_zero(m);   
     //move_reta(m, m1, 2, 2, 8, 7);
     setdown_motor(m);

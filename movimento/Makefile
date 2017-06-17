@@ -15,7 +15,7 @@ $(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
-test: testyvoltas.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(UTIL)
+test: testyvoltas.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(UTIL) $(CNC) $(GCODE) $(TOKEN)   
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^

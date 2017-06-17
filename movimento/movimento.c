@@ -29,6 +29,11 @@ int mover_para_ponto_zero(motor *m){
        read_conf_sensor(s, SY_AXIS);    
        FORWARD(m);
     }
+    if(m->axis == z_axis){
+       read_conf_sensor(s, SZ_AXIS);    
+       FORWARD(m);
+    }
+    printf("axis: %d\n", m->axis);
     setup_step(m, 3);
     int i = 0;
     while(1){
