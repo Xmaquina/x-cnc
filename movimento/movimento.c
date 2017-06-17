@@ -38,7 +38,7 @@ int mover_para_ponto_zero(motor *m){
         MOVE(m);
         i++;
         #ifdef RASP_OS 
-        //delay(1);
+        delay(DELAY_TIME);
         #endif
     }
     printf("Voltas:%d ", i);
@@ -60,19 +60,19 @@ int mover_zero_cnc(cnc *c){
         if(!SACTIVE(c->ym->s)){
             MOVE(c->ym);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
         if(!SACTIVE(c->zm->s)){
             MOVE(c->zm);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
         if(!SACTIVE(c->xm->s)){
             MOVE(c->xm);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
     }
@@ -95,13 +95,13 @@ int mover_zero(motor *xm, motor *ym, sensor *sx, sensor *sy){
         if(!SACTIVE(sx)){
             MOVE(xm);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
         if(!SACTIVE(sy)){
             MOVE(ym);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
         i++;
@@ -154,7 +154,7 @@ printf("voltas convertidas %d\n",voltas_convertidas);
         MOVE(m);
         MOVE(m1);
         #ifdef RASP_OS 
-        delay(1);
+        delay(DELAY_TIME);
         #endif
     }      
     return 0;

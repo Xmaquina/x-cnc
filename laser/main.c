@@ -24,7 +24,7 @@ printf("A qtde: %d\n", qtde);
     for(int i = 0; i < qtde; i++){
         //printf("nada\n");
         #ifdef RASP_OS
-        delay(1);
+        delay(DELAY_TIME);
         #endif
     } 
     LASEROFF(l);

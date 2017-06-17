@@ -56,7 +56,6 @@ printf("Motes %d\n", mot);
             MOVE(m);
         }else if(mot == 2){
             MOVE(m1);
-            //delay(1);
         }else if(mot == 3){
             MOVE(m);
             MOVE(m1);
@@ -69,7 +68,7 @@ printf("Motes %d\n", mot);
         }
        //delayMicroseconds(50);
        #ifdef RASP_OS
-        delay(1); 
+       delay(DELAY_TIME); 
        #endif 
    
         

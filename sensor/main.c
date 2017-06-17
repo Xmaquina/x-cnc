@@ -21,7 +21,7 @@ int main(int argv, char *argc[]){
         //int d = digitalRead(s->pin);
 printf("The state %d\n", s->state);
         #ifdef RASP_OS
-            delay(1);
+            delay(DELAY_TIME);
         #endif
     }
     printf("Deu certo\n");

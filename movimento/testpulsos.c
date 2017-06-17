@@ -24,7 +24,9 @@ int main(int argv, char *argc[]){
     setup_motor(m1);
     for(int i = 0; i < 10000; i++){
         MOVE(m1);
-        delay(1);
+        #ifdef RASP_OS
+        delay(DELAY_TIME);
+        #endif
     }
     setdown_motor(m);
     setdown_motor(m1);
