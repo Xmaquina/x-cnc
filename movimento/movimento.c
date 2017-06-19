@@ -60,25 +60,27 @@ int mover_zero_cnc(cnc *c){
         SREAD(c->ym->s);
         SREAD(c->zm->s);
         SREAD(c->xm->s);
-        if(SACTIVE(c->ym->s) && SACTIVE(c->zm->s) && SACTIVE(c->xm->s)){
+printf("Active x sensor %d\n", SACTIVE(c->xm->s));
+printf("Active z sensor %d\n", SACTIVE(c->zm->s));
+        if(SACTIVE(c->xm->s) && SACTIVE(c->zm->s) && SACTIVE(c->ym->s)){
           break;
         }
         if(!SACTIVE(c->ym->s)){
             MOVE(c->ym);
             #ifdef RASP_OS 
-            delay(DELAY_TIME);
+            delay(1);
             #endif
         }
         if(!SACTIVE(c->zm->s)){
             MOVE(c->zm);
             #ifdef RASP_OS 
-            delay(DELAY_TIME);
+            delay(1);
             #endif
         }
         if(!SACTIVE(c->xm->s)){
             MOVE(c->xm);
             #ifdef RASP_OS 
-            delay(DELAY_TIME);
+            delay(1);
             #endif
         }
     }

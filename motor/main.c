@@ -34,6 +34,7 @@ printf("Motes %d\n", mot);
     setup_motor(m);
     setup_motor(m1);
     setup_motor(m2);
+printf("DELAY_TIME %d\n", DELAY_TIME);
     
     if(direcao == 1){
         BACKWARD(m);
@@ -68,7 +69,7 @@ printf("Motes %d\n", mot);
         }
        //delayMicroseconds(50);
        #ifdef RASP_OS
-       delay(DELAY_TIME); 
+       delay(1); 
        #endif 
    
         

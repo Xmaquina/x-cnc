@@ -24,6 +24,6 @@ int main(int argv, char *argc[]){
             strerror(errno));
         return 1;  
     }
-     
+    mover_zero_cnc(c);     
     return 0;
 }

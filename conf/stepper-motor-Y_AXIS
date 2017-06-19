@@ -1,8 +1,8 @@
 angle = 1.9
-direction = 0
-step = 2
+direction = 8
+step = 9
 limit = 25
-ms1 = 11
-ms2 = 11
-ms3 = 11
+ms1 = 20
+ms2 = 20
+ms3 = 20
 set_step = 2
