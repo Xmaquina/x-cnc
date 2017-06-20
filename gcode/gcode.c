@@ -22,6 +22,7 @@ gc_node * create_node(gcommand *gc){
     if(gn != NULL){
         gn->elem = gc;
         gn->next = NULL; 
+        gn->prev = NULL; 
     }
     return gn;
 }
@@ -31,12 +32,11 @@ int add(gc_list *gl, gcommand *gc){
 
     if(gl->size == 0){
         gl->head = new;
+        gl->tail = new;
     }else{
-        gc_node *last = gl->head;
-        while(last->next != NULL){
-            last = last->next;
-        }
-        last->next = new;
+        new->prev = gl->tail;
+        gl->tail->next = new;
+        gl->tail = new;
     }
     gl->size++;
     return 0;
@@ -58,7 +58,7 @@ double get_digits_coordenate(gcommand *g, char *coord){
 }
 
 int set_G01_coordenates(gcommand *g){
-    if(strcmp(g->gcode, G01) != 0){
+    if(!(strcmp(g->gcode, G01) == 0 || strcmp(g->gcode, G00) == 0)){
         return 1;
     }
     //int val = 0;
@@ -150,3 +150,13 @@ int isG00(gcommand *g){
     return 0;
 }
 
+int print_gcommand(gcommand *g){
+    printf("Gcommand\n");
+    printf("Line: %s\n",g->line);
+    printf("Gcode: %s\n",g->gcode);
+    printf("X: %lf\n",g->x);
+    printf("Y: %lf\n",g->y); 
+    printf("Z: %lf\n",g->z);
+    printf("F: %lf\n",g->f);
+    return 1;
+}

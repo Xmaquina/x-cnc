@@ -50,4 +50,5 @@ int set_G01_coordenates(gcommand *g);
 int read_gcodefile(char *file_name,gc_list *gl); 
 int isG01(gcommand *g);
 int isG00(gcommand *g);
+int print_gcommand(gcommand *g);
 #endif

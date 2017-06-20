@@ -36,11 +36,8 @@ int main(int argv, char *argc[]){
 //        printf("Line %s", it->elem->line);
         get_gcode(it->elem);
         printf("Gcode %s\n", it->elem->gcode);
-        if(strcmp(it->elem->gcode, G01) == 0){
-            printf("G01 code\n");
-            set_G01_coordenates(it->elem);
-            printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
-        }
+        set_G01_coordenates(it->elem);
+        printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
     }
     
     #ifdef RASP_OS
@@ -61,7 +58,15 @@ int main(int argv, char *argc[]){
     p.x = 0; p.z = 0; p.y = 0;
     printf("Starting trabalho: \n");
     for(gc_node *it = gl->head; it != NULL; it = it->next){
-        executar(c, it->elem, NULL,&p);  
+        //printf("Elemento: \n");
+        //print_gcommand(it->elem);
+        if(it->prev != NULL){
+            executar(c, it->elem, it->prev->elem,&p);
+            //printf("Prev: \n");
+            //print_gcommand(it->prev->elem);
+        }else{
+            executar(c, it->elem, NULL, &p);
+        }  
     }
 
     return 0;

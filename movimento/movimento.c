@@ -91,19 +91,20 @@ printf("Active z sensor %d\n", SACTIVE(c->zm->s));
 
 
 int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
-    /*
     if(isG00(g) && !isG00(bg)){
-        BACKWARD(c->zm);
-        for(int i = 0; i<10000; i++){
-            MOVE(c->zm);
-        }
-    }else if(!isG00(g) && isG00(bg)){
+        printf("Subindo z\n");
         FORWARD(c->zm);
         for(int i = 0; i<10000; i++){
             MOVE(c->zm);
         }
+    }else if(!isG00(g) && isG00(bg)){
+        printf("Descendo z\n");
+        BACKWARD(c->zm);
+        for(int i = 0; i<10000; i++){
+            MOVE(c->zm);
+        }
     } 
-    */   
+       
     if(isG00(g) || isG01(g)){ 
         move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
     }        
