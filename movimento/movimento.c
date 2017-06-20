@@ -91,6 +91,7 @@ printf("Active z sensor %d\n", SACTIVE(c->zm->s));
 
 
 int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
+    /*
     if(isG00(g) && !isG00(bg)){
         BACKWARD(c->zm);
         for(int i = 0; i<10000; i++){
@@ -101,7 +102,8 @@ int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
         for(int i = 0; i<10000; i++){
             MOVE(c->zm);
         }
-    }    
+    } 
+    */   
     if(isG00(g) || isG01(g)){ 
         move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
     }        
@@ -201,7 +203,11 @@ printf("x %lf y %lf x1 %lf y1 %lf\n", x, y, x1, y1);
     int voltasx = dx * 1000;
     int voltasy = dy * 1000;
 printf("Voltas x %d voltas y %d\n",voltasx, voltasy);
-    bresenham1(m, m1, 0, 0, voltasx, voltasy);      
+    if(voltasx == 0 && voltasy > 0){
+        bresenham1(m1, m, 0, 0, voltasy, voltasx);      
+    }else if(voltasx > 0 && voltasy > 0){
+        bresenham1(m, m1, 0, 0, voltasx, voltasy);
+    }      
     return 0;
 }
 

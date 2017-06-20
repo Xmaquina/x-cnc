@@ -54,6 +54,9 @@ int main(int argv, char *argc[]){
             strerror(errno));
         return 1;  
     }   
+    //print_motor(c->xm);
+    //c->xm = get_motor(x_axis);
+    //print_motor(c->xm);
     ponto p;
     p.x = 0; p.z = 0; p.y = 0;
     printf("Starting trabalho: \n");

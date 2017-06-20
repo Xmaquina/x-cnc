@@ -28,6 +28,7 @@ typedef struct gcommand_ gcommand;
 struct gc_node_{
     gcommand *elem;
     struct gc_node_ *next;
+    struct gc_node_ *prev;
 };
 
 typedef struct gc_node_ gc_node;

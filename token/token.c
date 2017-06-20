@@ -138,7 +138,7 @@ token * get_digits_after_token(const char *line, const char *word, int spaces ){
         int i = begin;
 //printf("i %d\n", i);
         for(; i < len; i++){
-            if(!(isdigit(line[i]) || line[i] == '.')){
+            if(!(isdigit(line[i]) || line[i] == '.' || line[i] == '-' )){
                 break;
             }
         }

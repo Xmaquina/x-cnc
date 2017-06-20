@@ -64,6 +64,7 @@ typedef struct motor_ motor;
 
 int alloc_motor(motor **m);
 int read_conf(motor * m, int motor);
+int print_motor(motor *m);
 char * type_axis(motor *m);
 char * type_axis_c(motor_axis m);
 int set_sixteenth_step(motor *m);

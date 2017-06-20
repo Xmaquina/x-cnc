@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include "../token/token.h"
+#include "../util/util.h"
 
 #ifdef RASP_OS 
     #include<wiringPi.h>
@@ -43,7 +44,7 @@ char * type_axis_c(motor_axis m){
 }
 
 char * motor_file_name(motor *m){
-    char * f = "../conf/stepper-motor-";
+    char * f = file_name(CONFDIR, "stepper-motor-");
     char * r = malloc(sizeof(char) * 120);
     strcpy(r,f);
     strcat(r, type_axis(m));
@@ -270,6 +271,7 @@ void bresenham1(motor *mx, motor *my, int x1, int y1, int x2, int y2){
         else{            
            slope = 1;
         }
+//print_motor(mx);
         // Constante de Bresenham
         incE = 2 * dy;
         incNE = 2 * dy - 2 * dx;
@@ -277,9 +279,10 @@ void bresenham1(motor *mx, motor *my, int x1, int y1, int x2, int y2){
         y = y1;       
 printf("x2 %d\n",x2);
         for (x = x1; x <= x2; x++){
+            //printf("mexeu x sim o delay que nao funciona\n");
             MOVE(mx);
             #ifdef RASP_OS 
-            delay(DELAY_TIME);
+            delay(1);
             #endif
             if (d <= 0){
               d += incE;
@@ -290,7 +293,7 @@ printf("x2 %d\n",x2);
               y += slope;
               MOVE(my);
               #ifdef RASP_OS 
-              delay(DELAY_TIME);
+              delay(1);
               #endif
             }
         }
