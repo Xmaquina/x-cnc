@@ -277,9 +277,8 @@ void bresenham1(motor *mx, motor *my, int x1, int y1, int x2, int y2){
         incNE = 2 * dy - 2 * dx;
         d = 2 * dy - dx;
         y = y1;       
-printf("x2 %d\n",x2);
+printf("Eixo x2 %d\n",x2);
         for (x = x1; x <= x2; x++){
-            //printf("mexeu x sim o delay que nao funciona\n");
             MOVE(mx);
             #ifdef RASP_OS 
             delay(1);
