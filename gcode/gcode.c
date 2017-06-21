@@ -85,19 +85,30 @@ int set_gcommand_gcode(gcommand *g, const char * code){
     return 1;
 }
 
+int hasGCODE(gcommand *g){
+    tk_list *tl = create_list_tk();
+    if(tl == NULL) exit(EXIT_FAILURE);  
+    const char *gcodes[2] = {G01,G00};
+    for(int i = 0; i < NR_GCODES; i++){
+        get_token(g->line,gcodes[i], tl);
+        if(tl->size > 0){
+            free_tk_list(tl);
+            return 1;
+        } 
+    }
+    return 0;
+}
+
+
+
 int get_gcode(gcommand *g){
     tk_list *tl = create_list_tk();
     if(tl == NULL) exit(EXIT_FAILURE);  
     const char *gcodes[2] = {G01,G00};
     for(int i = 0; i < NR_GCODES; i++){
         get_token(g->line,gcodes[i], tl);
-//printf("Size tk %d\n", tl->size);
         if(tl->size > 0){
             set_gcommand_gcode(g, gcodes[i]);
-            //int len = strlen(gcodes[i]);
-            //g->gcode = (char *)malloc(sizeof(char) * len);
-            //strcpy(g->gcode, gcodes[i]);
-//printf("Gcode in get_code %s\n", g->gcode);
             free_tk_list(tl);
             break;
         } 
@@ -109,7 +120,6 @@ int copy_line(gcommand *gc, char *line){
     gc->line = (char *)malloc(sizeof(char) * strlen(line) + 1);
     if(gc->line != NULL){
         strncpy(gc->line, line, strlen(line));
-//printf("Line copied: %s", gc->line);
         return 0;
     }
     return 1;
@@ -119,13 +129,15 @@ int read_gcodefile(char *file_name, gc_list *gl){
     char buffer[255];
     FILE *fp = fopen(file_name, "r");
     if(fp != NULL){
+        int i = 0;
         while(1){
             gcommand *gc = (gcommand *)malloc(sizeof(gcommand));
             if(fgets(buffer, 255,fp) == NULL) break;
-//printf("Line read %s", buffer);
+printf("Line read %s", buffer);
             copy_line(gc, buffer);
+            gc->nr = i;
             add(gl, gc);
-//printf("Size list: %d\n", gl->size);  
+            i++;
         }
     }
     fclose(fp);

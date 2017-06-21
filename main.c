@@ -24,6 +24,10 @@ int main(int argv, char *argc[]){
         perror("One argument is needed\n");
         exit(EXIT_FAILURE);
     }
+    int exec = 1;
+    if(argv == 3){
+        exec = atoi(argc[2]);
+    }
     printf("Program name %s\n", argc[0]);
     printf("File name %s\n", argc[1]);
     gc_list * gl = create_list();
@@ -34,10 +38,12 @@ int main(int argv, char *argc[]){
     read_gcodefile(argc[1], gl);
     for(gc_node *it = gl->head; it != NULL; it = it->next){
 //        printf("Line %s", it->elem->line);
-        get_gcode(it->elem);
-        printf("Gcode %s\n", it->elem->gcode);
-        set_G01_coordenates(it->elem);
-        printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
+        if(hasGCODE(it->elem)){
+            get_gcode(it->elem);
+            printf("Gcode %s\n", it->elem->gcode);
+            set_G01_coordenates(it->elem);
+            printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
+        }
     }
     
     #ifdef RASP_OS
@@ -54,19 +60,21 @@ int main(int argv, char *argc[]){
     //print_motor(c->xm);
     //c->xm = get_motor(x_axis);
     //print_motor(c->xm);
-    ponto p;
-    p.x = 0; p.z = 0; p.y = 0;
-    printf("Starting trabalho: \n");
-    for(gc_node *it = gl->head; it != NULL; it = it->next){
-        //printf("Elemento: \n");
-        //print_gcommand(it->elem);
-        if(it->prev != NULL){
-            executar(c, it->elem, it->prev->elem,&p);
-            //printf("Prev: \n");
-            //print_gcommand(it->prev->elem);
-        }else{
-            executar(c, it->elem, NULL, &p);
-        }  
+    if(exec == 1){
+        ponto p;
+        p.x = 0; p.z = 0; p.y = 0;
+        printf("Starting trabalho: \n");
+        for(gc_node *it = gl->head; it != NULL; it = it->next){
+            //printf("Elemento: \n");
+            //print_gcommand(it->elem);
+            if(it->prev != NULL){
+                executar(c, it->elem, it->prev->elem,&p);
+                //printf("Prev: \n");
+                //print_gcommand(it->prev->elem);
+            }else{
+                executar(c, it->elem, NULL, &p);
+            }  
+        }
     }
 
     return 0;

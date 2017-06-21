@@ -16,6 +16,7 @@ typedef struct point_ point;
 struct gcommand_{
     char * line;
     char * gcode;
+    int nr;
     double x;
     double y; 
     double z;

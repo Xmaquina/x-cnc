@@ -65,6 +65,8 @@ int add_pair(tk_list *tl, int begin, int end){
     return 0;
 }
 
+
+
 int get_token(const char *line, const char *word, tk_list *tl){
 	int len = strlen(line);
 	int len_word = strlen(word);
@@ -72,15 +74,11 @@ int get_token(const char *line, const char *word, tk_list *tl){
         fprintf(stderr, "Len word %d or len line %d\n", len_word, len); 
         return 1;
     }
-//printf("workd %s\n", word);
 	unsigned int begin = 0;
 	for(unsigned int i = 0; i < len;i++){
-//printf("Line i %c %c\n",line[i], word[0]); 
 		if(line[i] == word[0]){
-//printf("Aqui\n");
 			begin = 1;
 			for(unsigned int j = 1; j < len_word; j++){
-//printf("word j %c %c\n",line[i+j], word[j]); 
 				if(word[j] != line[i+j]){
 					begin = 0;
 					break;
