@@ -211,6 +211,87 @@ int isG00(gcommand *g){
     return 0;
 }
 
+int isG04(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G04) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG40(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G40) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG49(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G49) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG80(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G80) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG54(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G54) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG90(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G90) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG21(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G21) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isG61(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, G61) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int isM(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, M) == 0){
+        return 1;
+    }
+    return 0;
+}
+  
+int isS(gcommand *g){
+    if(g == NULL) return 0;
+    if(strcmp(g->gcode, S) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+
 int print_gcommand(gcommand *g){
     printf("Gcommand\n");
     printf("Line: %s",g->line);

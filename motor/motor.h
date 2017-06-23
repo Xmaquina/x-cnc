@@ -25,6 +25,7 @@
      #else
         #define MOVE(x) digitalWrite((x)->pin_step,LOW); \
                         digitalWrite((x)->pin_step,HIGH)
+     #endif
 
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 
     #define FORWARD(x) digitalWrite((x)->pin_direction, HIGH)

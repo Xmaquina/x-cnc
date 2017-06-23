@@ -91,24 +91,18 @@ printf("Active z sensor %d\n", SACTIVE(c->zm->s));
 
 
 int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
-printf("G00 %d G00 %d\n",isG00(g), isG00(bg)); 
-    if(isG00(g) && !isG00(bg)){
-        printf("Subindo z\n");
-        FORWARD(c->zm);
-        for(int i = 0; i<200; i++){
-            MOVE(c->zm);
-        }
-    }else if(!isG00(g) && isG00(bg)){
-        printf("Descendo z\n");
-        BACKWARD(c->zm);
-        for(int i = 0; i<200; i++){
-            MOVE(c->zm);
-        }
-    } 
        
-    if(isG00(g) || isG01(g)){ 
+    if(isG00(g)){
+        if(isZ(g)){
+            printf("jfl\n");
+        }
+    }
+    if(isG01(g)){ 
         move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
     }        
+    if(isG40(g) || isG49(g) || isG80(g) || isG54(g) || isG90(g) || isG21(g) || isG61(g)){
+        printf("j\n");
+    }
     return 1;
 
 }
@@ -202,8 +196,8 @@ printf("y1 %lf\n",y1);
 printf("x %lf y %lf x1 %lf y1 %lf\n", x, y, x1, y1);
     double dy = y1 - y;
     double dx = x1 - x;
-    int voltasx = dx * 1000;
-    int voltasy = dy * 1000;
+    int voltasx = dx * VOLTAS_X;
+    int voltasy = dy * VOLTAS_Y;
 printf("Voltas x %d voltas y %d\n",voltasx, voltasy);
     if(voltasx == 0 && voltasy > 0){
         bresenham1(m1, m, 0, 0, voltasy, voltasx);      
