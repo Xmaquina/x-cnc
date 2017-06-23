@@ -41,9 +41,17 @@ int main(int argv, char *argc[]){
         if(hasGCODE(it->elem)){
             get_gcode(it->elem);
             printf("Gcode %s\n", it->elem->gcode);
-            set_G01_coordenates(it->elem);
+            set_coordenates(it->elem);
             printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
+        }else if(hasCoordenates(it->elem)){
+            if(it->prev != NULL && it->prev->elem->gcode != NULL){
+                set_gcode(it->prev->elem, it->elem);
+            }
+            set_coordenates(it->elem);
+            printf("Sem Gcode coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
+
         }
+
     }
     
     #ifdef RASP_OS
@@ -75,6 +83,11 @@ int main(int argv, char *argc[]){
                 executar(c, it->elem, NULL, &p);
             }  
         }
+    }else{
+        for(gc_node *it = gl->head; it != NULL; it = it->next){
+            print_gcommand(it->elem);  
+        }
+        
     }
 
     return 0;
