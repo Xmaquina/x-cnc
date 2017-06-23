@@ -178,6 +178,12 @@ int read_gcodefile(char *file_name, gc_list *gl){
             copy_line(gc, buffer);
             if(!isComment(gc)){
                 gc->nr = i;
+                if(hasGCODE(gc)){
+                    get_gcode(gc);
+                    set_coordenates(gc);
+                }else if(hasCoordenates(gc)){
+                    set_coordenates(gc);
+                }
                 add(gl, gc);
                 i++;
             }
@@ -247,11 +253,12 @@ int hasonecoordenate(gcommand *g, char *coordenate){
 
 }
 
-int isX(gcommand *g){
-    
-    return 0;
-
+int isX(gcommand *g){    
+    return hasonecoordenate(g, "X");
 }
-int isY(gcommand *g);
-int isZ(gcommand *g);
-
+int isY(gcommand *g){
+    return hasonecoordenate(g, "X");
+}
+int isZ(gcommand *g){
+    return hasonecoordenate(g, "X");
+}

@@ -15,10 +15,6 @@
 #endif
 
 
-int conversao(double distance){
-    return 0;    
-}
-
 int main(int argv, char *argc[]){
     if(argv < 2){
         perror("One argument is needed\n");
@@ -37,21 +33,7 @@ int main(int argv, char *argc[]){
     }
     read_gcodefile(argc[1], gl);
     for(gc_node *it = gl->head; it != NULL; it = it->next){
-//        printf("Line %s", it->elem->line);
-        if(hasGCODE(it->elem)){
-            get_gcode(it->elem);
-            printf("Gcode %s\n", it->elem->gcode);
-            set_coordenates(it->elem);
-            printf("Coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
-        }else if(hasCoordenates(it->elem)){
-            if(it->prev != NULL && it->prev->elem->gcode != NULL){
-                set_gcode(it->prev->elem, it->elem);
-            }
-            set_coordenates(it->elem);
-            printf("Sem Gcode coord x: %lf y: %lf z: %lf f: %lf\n", it->elem->x, it->elem->y, it->elem->z, it->elem->f);
-
-        }
-
+            print_gcommand(it->elem);  
     }
     
     #ifdef RASP_OS
@@ -83,12 +65,6 @@ int main(int argv, char *argc[]){
                 executar(c, it->elem, NULL, &p);
             }  
         }
-    }else{
-        for(gc_node *it = gl->head; it != NULL; it = it->next){
-            print_gcommand(it->elem);  
-        }
-        
     }
-
     return 0;
 }

@@ -3,4 +3,5 @@
 #define OTHERS 1
 #define DELAY_TIME 1
 #define CONFDIR "conf/"
+#define DRIVER_COMPRADO 1 
 #endif
