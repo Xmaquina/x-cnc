@@ -15,18 +15,18 @@
 #define MS2 "ms2" 
 #define MS3 "ms3" 
 #define SET_STEP "set_step" 
+#define DRIVER "driver" 
 #include "../osmacros.h"
 #include "../sensor/sensor.h"
 
 #ifdef RASP_OS 
-    #ifdef DRIVER_COMPRADO
-        #define MOVE(x) digitalWrite((x)->pin_step,HIGH); \
-                        digitalWrite((x)->pin_step,LOW)
-     #else
-        #define MOVE(x) digitalWrite((x)->pin_step,LOW); \
-                        digitalWrite((x)->pin_step,HIGH)
-     #endif
-
+        #define MOVE(x) \
+                        if((x)->driver == 2){ \
+                            digitalWrite((x)->pin_step,HIGH); \
+                            digitalWrite((x)->pin_step,LOW); \
+                        }else{ \
+                            digitalWrite((x)->pin_step,LOW); \
+                            digitalWrite((x)->pin_step,HIGH); }
     #define STOP(x) digitalWrite((x)->pin_step,HIGH) 
     #define FORWARD(x) digitalWrite((x)->pin_direction, HIGH)
     #define BACKWARD(x) digitalWrite((x)->pin_direction, LOW)
@@ -59,8 +59,7 @@ struct motor_{
     int pin_ms3;
     int set_step;
     sensor *s;
-    
- 
+    int driver;
 };
 
 typedef struct motor_ motor; 

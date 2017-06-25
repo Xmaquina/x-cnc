@@ -70,6 +70,7 @@ int print_motor(motor *m){
     printf("Pin ms2: %d\n", m->pin_ms2 );
     printf("Pin ms3: %d\n", m->pin_ms3 );
     printf("set step: %d\n", m->set_step );
+    printf("driver: %d\n", m->driver );
     return 1;
 }
 
@@ -94,7 +95,7 @@ int read_conf(motor *m, int motor){
     if(strcmp(buffer, "angle") == 0){
         m->step = angle;
     }
-    for(int i = 0; i < 7; i++){
+    for(int i = 0; i < 8; i++){
         fscanf(fp, "%s = %d", buffer, &value);
         if(strcmp(buffer, DIRECTION) == 0){
             m->pin_direction = (int)value;
@@ -116,6 +117,9 @@ int read_conf(motor *m, int motor){
         }
         if(strcmp(buffer, SET_STEP) == 0){
             m->set_step = (int)value;
+        }
+        if(strcmp(buffer, DRIVER) == 0){
+            m->driver = (int)value;
         }
     }
     print_motor(m);
