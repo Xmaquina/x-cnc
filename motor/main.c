@@ -69,7 +69,7 @@ printf("DELAY_TIME %d\n", DELAY_TIME);
         }
        //delayMicroseconds(50);
        #ifdef RASP_OS
-       delay(1); 
+       delay(DELAY_TIME); 
        #endif 
    
         
