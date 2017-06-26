@@ -91,18 +91,42 @@ printf("Active z sensor %d\n", SACTIVE(c->zm->s));
 
 
 int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
-       
+    printf("Codigo do capeta entrou ate aqui\n");   
     if(isG00(g)){
+        printf("It is g00\n");
         if(isZ(g)){
-            printf("jfl\n");
+            move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
+        }else{
+            move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
         }
     }
+    printf("Codigo do capeta entrou ate aqui\n");   
     if(isG01(g)){ 
-        move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
+        printf("It is g01\n");
+        if(isZ(g)){
+            move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
+        }else{
+            move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
+        }
     }        
-    if(isG40(g) || isG49(g) || isG80(g) || isG54(g) || isG90(g) || isG21(g) || isG61(g)){
-        printf("j\n");
+    if(isNULL(g)){ 
+        printf("It is null\n");
+        if(isZ(g)){
+            move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
+        }if(isF(g)){
+            printf("F\n");
+        }else{
+            move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
+        }
+    }else{
+        printf("it is not null\n");
     }
+    if(isG40(g) || isG49(g) || isG80(g) || isG54(g) || isG90(g) || isG21(g) || isG61(g)){
+        printf("gcomand sem nada\n");
+    }
+    p->x = g->x;
+    p->y = g->y;
+    p->z = g->z;
     return 1;
 
 }

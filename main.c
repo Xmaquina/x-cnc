@@ -32,10 +32,11 @@ int main(int argv, char *argc[]){
         exit(EXIT_FAILURE);
     }
     read_gcodefile(argc[1], gl);
+    /*
     for(gc_node *it = gl->head; it != NULL; it = it->next){
             print_gcommand(it->elem);  
     }
-    
+    */
     #ifdef RASP_OS
     wiringPiSetup();
     #endif
@@ -58,7 +59,8 @@ int main(int argv, char *argc[]){
             //printf("Elemento: \n");
             //print_gcommand(it->elem);
             if(it->prev != NULL){
-                executar(c, it->elem, it->prev->elem,&p);
+                print_gcommand(it->elem);
+                executar(c, it->elem, NULL,&p);
                 //printf("Prev: \n");
                 //print_gcommand(it->prev->elem);
             }else{

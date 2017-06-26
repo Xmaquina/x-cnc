@@ -6,6 +6,24 @@
     #include <wiringPi.h>
 #endif
 
+int testing_isNULL(){
+    printf("Teste de achar gcode\n");
+    char c[] = "testando X32";
+    gcommand g;
+    g.line = c;
+    g.gcode = NULL;
+    set_coordenates(&g);
+    printf("Teste isNULL\n");
+    if(isNULL(&g)){
+        printf("Passou no teste\n");
+    }else{
+        printf("Teste falhou o gcode e %s\n", g.gcode);
+    }
+    return 0;
+
+}
+
+
 
 int testing_get_gcode(){
     printf("Teste de achar gcode\n");
@@ -69,6 +87,7 @@ int main(int argv, char *argc[]){
     #ifdef RASP_OS
     wiringPiSetup();
     #endif    
+    testing_isNULL();
     testing_get_gcode();
     testing_set_G01_coordenates();
     testing_has_gcode();

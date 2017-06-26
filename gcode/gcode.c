@@ -173,6 +173,7 @@ int read_gcodefile(char *file_name, gc_list *gl){
         int i = 0;
         while(1){
             gcommand *gc = (gcommand *)malloc(sizeof(gcommand));
+            gc->gcode = NULL;
             if(fgets(buffer, 255,fp) == NULL) break;
 //printf("Line read %s", buffer);
             copy_line(gc, buffer);
@@ -198,13 +199,14 @@ int read_gcodefile(char *file_name, gc_list *gl){
 
 int isG01(gcommand *g){
     if(g == NULL) return 0;
+    if(g->gcode == NULL ) return 0;
     if(strcmp(g->gcode, G01) == 0){
         return 1;
     }
     return 0;
 }
 int isG00(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G00) == 0){
         return 1;
     }
@@ -212,7 +214,7 @@ int isG00(gcommand *g){
 }
 
 int isG04(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G04) == 0){
         return 1;
     }
@@ -220,7 +222,7 @@ int isG04(gcommand *g){
 }
 
 int isG40(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G40) == 0){
         return 1;
     }
@@ -228,7 +230,7 @@ int isG40(gcommand *g){
 }
 
 int isG49(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G49) == 0){
         return 1;
     }
@@ -236,7 +238,7 @@ int isG49(gcommand *g){
 }
 
 int isG80(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G80) == 0){
         return 1;
     }
@@ -244,7 +246,7 @@ int isG80(gcommand *g){
 }
 
 int isG54(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G54) == 0){
         return 1;
     }
@@ -252,7 +254,7 @@ int isG54(gcommand *g){
 }
 
 int isG90(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G90) == 0){
         return 1;
     }
@@ -260,7 +262,7 @@ int isG90(gcommand *g){
 }
 
 int isG21(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G21) == 0){
         return 1;
     }
@@ -268,7 +270,7 @@ int isG21(gcommand *g){
 }
 
 int isG61(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, G61) == 0){
         return 1;
     }
@@ -276,7 +278,7 @@ int isG61(gcommand *g){
 }
 
 int isM(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, M) == 0){
         return 1;
     }
@@ -284,10 +286,17 @@ int isM(gcommand *g){
 }
   
 int isS(gcommand *g){
-    if(g == NULL) return 0;
+    if(g == NULL || g->gcode == NULL) return 0;
     if(strcmp(g->gcode, S) == 0){
         return 1;
     }
+    return 0;
+}
+
+
+int isNULL(gcommand *g){
+    if(g == NULL) return 0;
+    if(g->gcode == NULL) return 1;
     return 0;
 }
 
@@ -338,8 +347,13 @@ int isX(gcommand *g){
     return hasonecoordenate(g, "X");
 }
 int isY(gcommand *g){
-    return hasonecoordenate(g, "X");
+    return hasonecoordenate(g, "Y");
 }
 int isZ(gcommand *g){
-    return hasonecoordenate(g, "X");
+    return hasonecoordenate(g, "Z");
 }
+
+int isF(gcommand *g){
+    return hasonecoordenate(g, "F");
+}
+
