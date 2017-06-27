@@ -91,7 +91,6 @@ printf("Active z sensor %d\n", SACTIVE(c->zm->s));
 
 
 int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
-    printf("Codigo do capeta entrou ate aqui\n");   
     if(isG00(g)){
         printf("It is g00\n");
         if(isZ(g)){
@@ -100,7 +99,6 @@ int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
             move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
         }
     }
-    printf("Codigo do capeta entrou ate aqui\n");   
     if(isG01(g)){ 
         printf("It is g01\n");
         if(isZ(g)){
@@ -118,8 +116,6 @@ int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
         }else{
             move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
         }
-    }else{
-        printf("it is not null\n");
     }
     if(isG40(g) || isG49(g) || isG80(g) || isG54(g) || isG90(g) || isG21(g) || isG61(g)){
         printf("gcomand sem nada\n");
