@@ -10,8 +10,14 @@ def do_login(server_connection, user_email, user_password):
     server_connection.pass_(user_password)
 
 def read_mail_body(connection_loged, mail_id):
-    mail_body = str(connection_loged.retr(mail_id)[1][-1])
-    return mail_body[2:-1]
+    body = connection_loged.retr(mail_id)
+    matching = [s for s in body[1] if "Message-ID" in s]
+    if matching is not None:
+        index = body[1].index(matching[0])
+        mail_body = body[1][index+2:]
+    else:
+        mail_body = []
+    return mail_body
 	
 def read_mail_subject(connection_loged, mail_id):
     mail_body = str(connection_loged.retr(mail_id)[1][-3])
@@ -50,9 +56,13 @@ def read_mails(user_email, user_password):
 
 def main():
     text = read_mails("xmaquinaxmaquina@gmail.com", "x1maquina2")
+    print("Len: ", len(text))
     fn = open("teste.ngc", "w")
     for key in text:
-        fn.write(text[key])
+        body = text[key]
+        for b in body:
+            fn.write(b+"\n")
+        
     fn.close()
 
 
