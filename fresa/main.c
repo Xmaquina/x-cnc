@@ -3,6 +3,7 @@
 #include "fresa.h"
 #include "../token/token.h"
 #include <string.h>
+#include "../osmacros.h"
 #ifdef RASP_OS
     #include <wiringPi.h>
 #endif
@@ -20,8 +21,9 @@ printf("A qtde: %d\n", qtde);
     alloc_fresa(&f);
     read_conf_fresa(f);
     FRESAON(f);
+    sleep(1);
     for(int i = 0; i < qtde; i++){
-        printf("nada\n");
+        delay(i);
     } 
     FRESAOFF(f);
     printf("Deu certo\n");

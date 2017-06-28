@@ -30,7 +30,7 @@ qtest: testq.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
 	@echo $(R)
 	$(CC) $(CFLAGS) -o $@ $^
 
-ttest: testt.o $(MOTOR) $(MACROS) sensor.o movimento.o $(UTIL)
+ttest: testt.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(UTIL) $(CNC) $(GCODE) $(TOKEN)
 	@echo $(DISTRO)
 	@echo $(R)
 	$(CC) $(CFLAGS) $(WIRINGFLAG) -o $@ $^ -lm
