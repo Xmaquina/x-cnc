@@ -27,19 +27,7 @@ int print_fresa(fresa *f){
 
 int read_conf_fresa(fresa *f){
     if(f == NULL){ exit(EXIT_FAILURE); };
-    FILE *fp;
-    char *filename = file_name(CONFDIR,"fresa");
-printf("filename %s\n", filename);
-    if(file_exists(filename)){
-        fp = fopen(filename, "r");
-    }else{
-        exit(EXIT_FAILURE); 
-    }
-    if(fp == NULL){
-        fprintf (stderr, "Couldn't open file conf/fresa; %s\n",
-                 strerror (errno));
-        exit (EXIT_FAILURE);
-    }
+    FILE *fp =  open_file("fresa");  
     char buffer[255];
     int value = 0;
     fscanf(fp, "%s = %d", buffer, &value);

@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "fresa.h"
 #include "../token/token.h"
 #include <string.h>
@@ -21,9 +22,13 @@ printf("A qtde: %d\n", qtde);
     alloc_fresa(&f);
     read_conf_fresa(f);
     FRESAON(f);
-    sleep(1);
     for(int i = 0; i < qtde; i++){
-        delay(i);
+        #ifdef RASP_OS
+            delay(i);
+        #else
+            sleep(1);
+        #endif
+
     } 
     FRESAOFF(f);
     printf("Deu certo\n");
