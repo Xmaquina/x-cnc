@@ -1,4 +1,5 @@
 import poplib
+import os
 
 def connect_server():
     mail_server = 'pop.gmail.com'
@@ -54,17 +55,20 @@ def read_mails(user_email, user_password):
     connection.quit()
     return mails
 
-def main():
+def save_file():
     text = read_mails("xmaquinaxmaquina@gmail.com", "x1maquina2")
     print("Len: ", len(text))
-    fn = open("teste.ngc", "w")
+    files_names = []
     for key in text:
+        file_name = key + ".ngc"
+        file_name = os.path.join(os.path.abspath("."), "arquivos", file_name)
+        fn = open(file_name, "w")
         body = text[key]
         for b in body:
             fn.write(b+"\n")
-        
-    fn.close()
+        fn.close()
+        files_names.append(file_name)
 
-
+    return files_names
 if __name__ == "__main__":
     main()
