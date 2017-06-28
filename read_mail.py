@@ -1,3 +1,5 @@
+import poplib
+
 def connect_server():
     mail_server = 'pop.gmail.com'
     server_connection = poplib.POP3_SSL(mail_server)
@@ -45,3 +47,14 @@ def read_mails(user_email, user_password):
         mail_box = mail_box - 1
     connection.quit()
     return mails
+
+def main():
+    text = read_mails("xmaquinaxmaquina@gmail.com", "x1maquina2")
+    fn = open("teste.ngc", "w")
+    for key in text:
+        fn.write(text[key])
+    fn.close()
+
+
+if __name__ == "__main__":
+    main()
