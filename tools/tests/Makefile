@@ -10,9 +10,11 @@ CC            = gcc
 TARGET     = motor
 MAIN       = main.c
 
-.DEFAULT_GOAL := motor laser 
+.DEFAULT_GOAL := all 
 
 include ../../Makefile.conf
+
+all: motor laser fresa sensor
 
 motor: motortest.o $(MOTOR) $(MACROS) $(SENSOR) $(UTIL) 
 	@echo $(DISTRO)
@@ -44,5 +46,5 @@ fresatest.o : fresatest.c
 	$(CC) $(CFLAGS)  -c -o $@ $<
 
 clean:
-	rm *.o ctest ktest dtest rtest    
-	rm $(TARGET)
+	rm *.o     
+	rm motor sensor fresa laser
