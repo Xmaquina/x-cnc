@@ -9,7 +9,7 @@ class Daemon:
 	
 	Usage: subclass the Daemon class and override the run() method
 	"""
-	def __init__(self, pidfile, stdin='/dev/null', stdout='/dev/null', stderr='/dev/null'):
+	def __init__(self, pidfile, stdin='/tmp/t1', stdout='/tmp/t2', stderr='/tmp/t3'):
 		self.stdin = stdin
 		self.stdout = stdout
 		self.stderr = stderr
@@ -21,6 +21,7 @@ class Daemon:
 		Programming in the UNIX Environment" for details (ISBN 0201563177)
 		http://www.erlenstar.demon.co.uk/unix/faq_2.html#SEC16
 		"""
+		print("Algum sinal")
 		try: 
 			pid = os.fork() 
 			if pid > 0:

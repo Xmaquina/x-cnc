@@ -7,13 +7,15 @@ import time
 from daemon import Daemon
 
 class CncDaemon(Daemon):
-    def run():
+    def run(self):
         while True: 
+            sys.stdout.write("Start")
             prog = os.path.abspath("x-cnc")
             file_gcode = save_file()
             for file_name in file_gcode:
+                sys.stdout.write("Arquivo sendo processado: " + file_name) 
                 subprocess.check_call([prog,file_name])
-            time.sleep(1)
+            time.sleep(3)
 
 
 if __name__ == "__main__":
