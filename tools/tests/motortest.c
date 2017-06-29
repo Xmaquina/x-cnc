@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "motor.h"
+#include "../motor.h"
 #include <string.h>
-#include "../osmacros.h"
+#include "../../osmacros.h"
 #ifdef RASP_OS
     #include <wiringPi.h>
 #endif

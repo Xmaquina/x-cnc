@@ -2,13 +2,13 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "motor/motor.h"
+#include "tools/motor.h"
 #include "gcode/gcode.h"
-#include "sensor/sensor.h"
+#include "tools/sensor.h"
 #include <string.h>
 #include "osmacros.h"
 #include "movimento/movimento.h"
-#include "movimento/cnc.h"
+#include "tools/cnc.h"
 #include <errno.h>
 #ifdef RASP_OS
     #include <wiringPi.h>

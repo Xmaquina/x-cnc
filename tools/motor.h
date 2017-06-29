@@ -17,7 +17,7 @@
 #define SET_STEP "set_step" 
 #define DRIVER "driver" 
 #include "../osmacros.h"
-#include "../sensor/sensor.h"
+#include "sensor.h"
 
 #ifdef RASP_OS 
         #define MOVE(x) \

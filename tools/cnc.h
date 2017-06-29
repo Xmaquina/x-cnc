@@ -2,10 +2,10 @@
 #define CNC_H
 
 #define PI 3.14159265
-#include "../motor/motor.h"
-#include "../fresa/fresa.h"
-#include "../laser/laser.h"
-#include "../sensor/sensor.h"
+#include "motor.h"
+#include "fresa.h"
+#include "laser.h"
+#include "sensor.h"
 #include "../osmacros.h"
 
 #define FRESA 1

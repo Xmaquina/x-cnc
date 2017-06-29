@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "sensor.h"
-#include "../token/token.h"
+#include "../sensor.h"
 #include <string.h>
 #ifdef RASP_OS
     #include <wiringPi.h>

@@ -2,13 +2,13 @@
 #define MOVIMENTO_H
 
 #define PI 3.14159265
-#include "../motor/motor.h"
-#include "../fresa/fresa.h"
-#include "../laser/laser.h"
-#include "../sensor/sensor.h"
+#include "../tools/motor.h"
+#include "../tools/fresa.h"
+#include "../tools/laser.h"
+#include "../tools/sensor.h"
 #include "../gcode/gcode.h"
 #include "../osmacros.h"
-#include "cnc.h"
+#include "../tools/cnc.h"
 
 struct ponto_{
     double x;

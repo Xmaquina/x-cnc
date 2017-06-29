@@ -1,8 +1,8 @@
 #include "cnc.h"
-#include "../motor/motor.h"
-#include "../laser/laser.h"
-#include "../fresa/fresa.h"
-#include "../sensor/sensor.h"
+#include "motor.h"
+#include "laser.h"
+#include "fresa.h"
+#include "sensor.h"
 #include "../xcncmacros.h"
 #include "../osmacros.h"
 #include<stdio.h>
