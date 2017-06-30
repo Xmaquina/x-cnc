@@ -92,36 +92,20 @@ printf("Active z sensor %d\n", SACTIVE(c->zm->s));
 
 int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
     int x = 0, z = 0, y = 0;
-    if(isG00(g)){
-        printf("It is g00\n");
+    if(isNULL(g) || isG01(g) || isG00(g)){ 
         if(isZ(g)){
             z = 1;
             move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
-        }else{
-            move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
-            x = 1; y = 1;
-        }
-    }
-    if(isG01(g)){ 
-        printf("It is g01\n");
-        if(isZ(g)){
-            z = 1;
-            move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
-        }else{
-            x = 1; y = 1;
-            move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
-        }
-    }        
-    if(isNULL(g)){ 
-        printf("It is null\n");
-        if(isZ(g)){
-            move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
-        }if(isF(g)){
+        }else if(isF(g)){
             printf("F\n");
-        }if(isX(g)){
+        }else if(isY(g)){
+            y = 1;
+            move_reta2(c->xm, c->ym, p->x, p->y, p->x, g->y);
+        }else if(isX(g)){
             move_reta2(c->xm, c->ym, p->x, p->y, g->x, p->y);
             x = 1;
         }else{
+            x = 1; y = 1;
             move_reta2(c->xm, c->ym, p->x, p->y, g->x, g->y);
         }
     }

@@ -60,6 +60,7 @@ int get_gcode(gcommand *g);
 int set_coordenates(gcommand *g);
 int read_gcodefile(char *file_name,gc_list *gl); 
 int isNULL(gcommand *g);
+int isgcode(gcommand *g, char *code);
 int isG01(gcommand *g);
 int isG00(gcommand *g);
 int isG04(gcommand *g);

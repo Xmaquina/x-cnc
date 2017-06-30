@@ -195,102 +195,59 @@ int read_gcodefile(char *file_name, gc_list *gl){
 }
 
 
-
-
-int isG01(gcommand *g){
-    if(g == NULL) return 0;
-    if(g->gcode == NULL ) return 0;
-    if(strcmp(g->gcode, G01) == 0){
+int isgcode(gcommand *g, char *code){
+    if(g == NULL || g->gcode == NULL) return 0;
+    if(strcmp(g->gcode, code) == 0){
         return 1;
     }
     return 0;
 }
+
+int isG01(gcommand *g){
+    return isgcode(g, G01);
+}
 int isG00(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G00) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G00);
 }
 
 int isG04(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G04) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G04);
 }
 
 int isG40(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G40) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G40);
 }
 
 int isG49(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G49) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G49);
 }
 
 int isG80(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G80) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G80);
 }
 
 int isG54(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G54) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G54);
 }
 
 int isG90(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G90) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G90);
 }
 
 int isG21(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G21) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G21);
 }
 
 int isG61(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, G61) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, G61);
 }
 
 int isM(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, M) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, M);
 }
   
 int isS(gcommand *g){
-    if(g == NULL || g->gcode == NULL) return 0;
-    if(strcmp(g->gcode, S) == 0){
-        return 1;
-    }
-    return 0;
+    return isgcode(g, S);
 }
 
 
