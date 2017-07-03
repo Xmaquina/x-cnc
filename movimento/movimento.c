@@ -95,7 +95,16 @@ int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
     if(isNULL(g) || isG01(g) || isG00(g)){ 
         if(isZ(g)){
             z = 1;
-            move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
+            if(isLaser(c)){
+                printf("Porque nao para %lf %lf\n",g->z, p->z); 
+                if(g->z - p->z > 0){
+                    LASEROFF(c->l);
+                }else{
+                    LASERON(c->l);
+                }
+            }else{
+                move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
+            }
         }else if(isF(g)){
             printf("F\n");
         }else if(isY(g)){

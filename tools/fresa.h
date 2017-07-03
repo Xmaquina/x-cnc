@@ -4,10 +4,10 @@
 
 #ifdef RASP_OS 
     #define FACTIVE(x) (x)->state == 1 ? 1 : 0
-    #define FRESAON(x) digitalWrite((x)->pin, LOW);\
+    #define FRESAON(x) digitalWrite((x)->pin, HIGH);\
                        (x)->state = 1
                          
-    #define FRESAOFF(x) digitalWrite((x)->pin, HIGH);(x)->state = 0
+    #define FRESAOFF(x) digitalWrite((x)->pin, LOW);(x)->state = 0
 #else 
     #define FACTIVE(x) (x)->state == 1 ? 1 : 0
     #define FRESAON(x) (x)->state = 1

@@ -31,9 +31,14 @@ int read_cnc(cnc *c){
     alloc_fresa(&c->f);
     read_conf_fresa(c->f);
     read_conf_laser(c->l);
+    setup_laser(c->l);
     c->xm = get_motor(x_axis);
     c->ym = get_motor(y_axis);
     c->zm = get_motor(z_axis);
+    setup_motor(c->xm);
+    setup_motor(c->ym);
+    setup_motor(c->zm);
+    
     return 1;
 }
 

@@ -285,7 +285,7 @@ printf("Eixo %s %d\n",type_axis_c(mx->axis), x2);
         for (x = x1; x <= x2; x++){
             MOVE(mx);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
             if (d <= 0){
               d += incE;
@@ -296,7 +296,7 @@ printf("Eixo %s %d\n",type_axis_c(mx->axis), x2);
               y += slope;
               MOVE(my);
               #ifdef RASP_OS 
-              delay(1);
+              delay(DELAY_TIME);
               #endif
             }
         }

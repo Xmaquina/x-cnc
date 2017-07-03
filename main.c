@@ -48,6 +48,7 @@ int main(int argv, char *argc[]){
             strerror(errno));
         return 1;  
     }   
+    c->type_of_work = LASER;
     //print_motor(c->xm);
     //c->xm = get_motor(x_axis);
     //print_motor(c->xm);
