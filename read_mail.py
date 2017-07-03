@@ -58,11 +58,15 @@ def read_mails(user_email, user_password):
 def save_file():
     text = read_mails("xmaquinaxmaquina@gmail.com", "x1maquina2")
     print("Len: ", len(text))
+    diretorio = os.path.join("/home/pi/x-cnc", "arquivos")
+    print("Diretorio existe:",diretorio, os.path.exists(diretorio))
     files_names = []
+    i = 0
     for key in text:
-        file_name = key + ".ngc"
-        file_name = os.path.join(os.path.abspath("."), "arquivos", file_name)
-        fn = open(file_name, "w")
+        file_name = str(i) + ".ngc"
+        file_name = os.path.join(diretorio, file_name)
+        print("File saved:", file_name)
+        fn = open(file_name, "w+")
         body = text[key]
         for b in body:
             fn.write(b+"\n")
