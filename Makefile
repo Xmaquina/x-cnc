@@ -13,12 +13,10 @@ all = $(TARGET)
 
 include Makefile.conf
 
-$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(UTIL) $(CNC) $(GCODE) $(TOKEN) 
-	@echo $(DISTRO)
-	@echo $(R)
+$(TARGET): main.o $(MOTOR) $(MACROS) $(SENSOR) $(MOVIMENTO) $(FRESA) $(LASER) $(UTIL) $(CNC) $(GCODE) $(TOKEN)  
 	$(CC) $(CFLAGS) -o $@ $^ -lm
 
-main.o : main.c $(MOTOR)
+main.o : main.c 
 	$(CC) $(CFLAGS)  -c -o $@ $< 
 
 clear:

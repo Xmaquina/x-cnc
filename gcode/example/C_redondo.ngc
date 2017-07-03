@@ -1,0 +1,74 @@
+;PYCAM-META-DATA: Filename: /home/gustavo/Downloads/C_circular.dxf
+;PYCAM-META-DATA: Timestamp: 2017-07-03 19:53:09.168224
+;PYCAM-META-DATA: Version: 0.5.1
+;Estimated machine time: 1 minutes
+G40 (disable tool radius compensation)
+G49 (disable tool length compensation)
+G80 (cancel modal motion)
+G54 (select coordinate system 1)
+G90 (disable incremental moves)
+G21 (metric)
+G61 (exact path mode)
+F200.00000
+S1000.00000
+;PYCAM_TOOLPATH_SETTINGS: START
+;[Bounds]
+;maxz = 0.0
+;maxx = 21.0002460148
+;maxy = 21.0175676603
+;minx = -1.00002236498
+;miny = -1.18885226363
+;minz = 0.0
+;
+;[Tool]
+;torus_radius = 0.2
+;speed = 1000.0
+;shape = ToroidalCutter
+;tool_radius = 1.0
+;feedrate = 200.0
+;
+;[Process]
+;engrave_offset = 0.0
+;step_down = 1.5
+;generator = EngraveCutter
+;postprocessor = SimpleCutter
+;milling_style = conventional
+;material_allowance = 0.0
+;pocketing_type = none
+;path_direction = x
+;
+;PYCAM_TOOLPATH_SETTINGS: END
+T2 M6
+G0 Z25.0000
+M3 (start spindle)
+G04 P3 (wait for 3 seconds)
+ X0.0000 Y0.0000
+G1 Z0.0000
+ X11.7700
+G0 Z25.0000
+ X8.0581
+G1 Z0.0000
+ X10.0212 Y-0.1717
+ X11.9803 Y0.0417
+ X13.8604 Y0.6318
+ X15.5899 Y1.5763
+ X17.1028 Y2.8391
+ X18.3412 Y4.3718
+ X19.2580 Y6.1162
+ X19.8181 Y8.0055
+ X20.0002 Y9.9677
+ X19.7973 Y11.9278
+ X19.2171 Y13.8110
+ X18.2819 Y15.5455
+ X17.0272 Y17.0651
+ X15.5010 Y18.3117
+ X13.7615 Y19.2377
+ X11.8752 Y19.8079
+ X9.9141 Y20.0004
+ Y20.0000
+ X0.0000
+G0 Z25.0000
+M5 (stop spindle)
+G04 P3 (wait for 3 seconds)
+G0 Z25.0000
+M2 (end program)

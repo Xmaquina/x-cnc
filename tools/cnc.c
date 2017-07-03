@@ -29,8 +29,8 @@ int alloc_cnc(cnc **c){
 int read_cnc(cnc *c){
     alloc_laser(&c->l);
     alloc_fresa(&c->f);
-    read_conf_fresa(c->f);
     read_conf_laser(c->l);
+    read_conf_fresa(c->f);
     setup_laser(c->l);
     c->xm = get_motor(x_axis);
     c->ym = get_motor(y_axis);
@@ -39,6 +39,20 @@ int read_cnc(cnc *c){
     setup_motor(c->ym);
     setup_motor(c->zm);
     
+    return 1;
+}
+
+int setdown_cnc(cnc *c){
+    if(isLaser(c)){
+        LASEROFF(c->l);
+    }else{
+        FRESAOFF(c->f);
+    }
+    free(c->l);    
+    free(c->f);    
+    free(c->xm);    
+    free(c->ym);    
+    free(c->zm);    
     return 1;
 }
 

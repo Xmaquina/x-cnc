@@ -42,12 +42,12 @@ int main(int argv, char *argc[]){
     #endif
     cnc *c;
     alloc_cnc(&c);
-    read_cnc(c);
     if(c == NULL){
         fprintf(stderr, "It cannot allocated cnc structure because of %s\n",
             strerror(errno));
         return 1;  
     }   
+    read_cnc(c);
     c->type_of_work = LASER;
     //print_motor(c->xm);
     //c->xm = get_motor(x_axis);
@@ -69,5 +69,7 @@ int main(int argv, char *argc[]){
             }  
         }
     }
+    setdown_cnc(c);
+    free(c);
     return 0;
 }

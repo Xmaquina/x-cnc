@@ -27,5 +27,5 @@ int read_cnc(cnc *c);
 int set_work(cnc *c, int op);
 int isLaser(cnc *c);
 int isFresa(cnc *c);
-
+int setdown_cnc(cnc *c);
 #endif
