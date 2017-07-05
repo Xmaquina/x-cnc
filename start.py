@@ -10,11 +10,12 @@ class CncDaemon(Daemon):
     def run(self):
         while True: 
             sys.stdout.write("Start")
-            prog = os.path.abspath("x-cnc")
+            prog = os.path.abspath("/home/pi/x-cnc")
             file_gcode = save_file()
             for file_name in file_gcode:
+                op = int(file_name.split("_")[1].split(".")[0])
                 sys.stdout.write("Arquivo sendo processado: " + file_name) 
-                subprocess.check_call([prog,file_name])
+                subprocess.check_call([prog,file_name,1,op])
             time.sleep(3)
 
 

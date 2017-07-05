@@ -21,8 +21,11 @@ def read_mail_body(connection_loged, mail_id):
     return mail_body
 	
 def read_mail_subject(connection_loged, mail_id):
-    mail_body = str(connection_loged.retr(mail_id)[1][-3])
-    return mail_body[10:-1]
+    body = connection_loged.retr(mail_id)
+    matching = [ s for s in body[1] if "Subject" in s]
+    if matching:
+        return matching
+    return str(mail_id)
 
 def delete (connection_loged, mail_id):
     connection_loged.retr(mail_id)[1][13]
@@ -55,6 +58,13 @@ def read_mails(user_email, user_password):
     connection.quit()
     return mails
 
+def get_id_from_subject(subject):
+    return str(subject[0].replace("Subject: ", "").split("/")[0])
+
+def get_type_from_subject(subject):
+    return str(subject[0].replace("Subject: ", "").split("/")[1])
+
+
 def save_file():
     text = read_mails("xmaquinaxmaquina@gmail.com", "x1maquina2")
     print("Len: ", len(text))
@@ -63,7 +73,7 @@ def save_file():
     files_names = []
     i = 0
     for key in text:
-        file_name = str(i) + ".ngc"
+        file_name = get_id_from_subject(key) + "_" + get_type_from_subject(subject)  + ".ngc"
         file_name = os.path.join(diretorio, file_name)
         print("File saved:", file_name)
         fn = open(file_name, "w+")
