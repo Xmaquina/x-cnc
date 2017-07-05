@@ -43,7 +43,7 @@ int main(int argv, char *argc[]){
     }
     */
     #ifdef RASP_OS
-    wiringPiSetup();
+        wiringPiSetup();
     #endif
     cnc *c;
     alloc_cnc(&c);
@@ -53,17 +53,18 @@ int main(int argv, char *argc[]){
         return 1;  
     }   
     read_cnc(c);
-    if(tool == LASER){
+    if(tool == 0){
         c->type_of_work = LASER;
-    }else{
+    }else if(tool == 1){
         c->type_of_work = FRESA;
+    }else{
+        c->type_of_work = LASER;
     }
     //print_motor(c->xm);
     //c->xm = get_motor(x_axis);
     //print_motor(c->xm);
     mover_zero_cnc(c); 
     if(exec == 1){
-        /*
         ponto p;
         p.x = 0; p.z = 0; p.y = 0;
         printf("Starting trabalho: \n");
@@ -79,7 +80,6 @@ int main(int argv, char *argc[]){
                 executar(c, it->elem, NULL, &p);
             }  
         }
-        */
     }
     setdown_cnc(c);
     free(c);

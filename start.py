@@ -8,15 +8,19 @@ from daemon import Daemon
 
 class CncDaemon(Daemon):
     def run(self):
+        prog = os.path.abspath("/home/gustavo/Documents/x-cnc/x-cnc")
+        output = open("/home/gustavo/Documents/x-cnc/log","w")
         while True: 
             sys.stdout.write("Start")
-            prog = os.path.abspath("/home/pi/x-cnc")
-            file_gcode = save_file()
+            file_gcode = ["/home/gustavo/Documents/x-cnc/arquivos/20_0.ngc"]
             for file_name in file_gcode:
-                op = int(file_name.split("_")[1].split(".")[0])
-                sys.stdout.write("Arquivo sendo processado: " + file_name) 
-                subprocess.check_call([prog,file_name,1,op])
-            time.sleep(3)
+                op = file_name.split("_")[1].split(".")[0]
+                sys.stdout.write("Option to do: " + str(op) + "\n")
+                sys.stdout.write("Arquivo sendo processado: " + file_name + "\n") 
+                subprocess.Popen([prog,file_name,"1",op], stdout=output)
+            time.sleep(100000000)
+
+        output.close()
 
 
 if __name__ == "__main__":

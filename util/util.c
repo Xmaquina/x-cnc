@@ -18,7 +18,7 @@ int file_exists(char *name){
 FILE * open_file(char* file){
     FILE *fp;
     char *filename = file_name(CONFDIR,file);
-    printf("filename %s\n", filename);
+    printf("Filename:%s file path: %s\n",file, filename);
     if(file_exists(filename)){
         fp = fopen(filename, "r");
     }else{
