@@ -23,7 +23,7 @@ int mover_para_ponto_zero(motor *m){
     alloc_sensor(&s);
     if(m->axis == x_axis){
        read_conf_sensor(s, SX_AXIS);    
-       FORWARD(m);
+       BACKWARD(m);
     }
     if(m->axis == y_axis){
        read_conf_sensor(s, SY_AXIS);    
@@ -31,13 +31,13 @@ int mover_para_ponto_zero(motor *m){
     }
     if(m->axis == z_axis){
        read_conf_sensor(s, SZ_AXIS);    
-       FORWARD(m);
+       BACKWARD(m);
     }
     printf("axis: %d\n", m->axis);
-    setup_step(m, 3);
     int i = 0;
     while(1){
         SREAD(s);
+        printf("%d\n", SREAD(s));
         if(SACTIVE(s)){
           break;
         }
@@ -54,15 +54,15 @@ int mover_para_ponto_zero(motor *m){
 
 int mover_zero_cnc(cnc *c){
     FORWARD(c->ym);
-    FORWARD(c->xm);
-    FORWARD(c->zm);
+    BACKWARD(c->xm);
+    BACKWARD(c->zm);
     while(1){
         SREAD(c->ym->s);
         SREAD(c->zm->s);
         SREAD(c->xm->s);
-printf("Active x sensor %d\n", SACTIVE(c->xm->s));
-printf("Active z sensor %d\n", SACTIVE(c->zm->s));
-        if(SACTIVE(c->xm->s) && SACTIVE(c->zm->s) && SACTIVE(c->ym->s)){
+//printf("Active x sensor %d\n", SACTIVE(c->xm->s));
+//printf("Active z sensor %d\n", SACTIVE(c->zm->s));
+        if(isAcative(c->xm->s) == 1 && isAcative(c->zm->s) == 1 && isAcative(c->ym->s) == 1){
           break;
         }
         if(!SACTIVE(c->ym->s)){
@@ -103,7 +103,7 @@ int executar(cnc *c, gcommand *g,gcommand *bg, ponto *p){
                     LASERON(c->l);
                 }
             }else{
-                move_reta2(c->zm, c->ym, p->z, p->y, g->z, g->y);
+                move_reta2(c->zm, c->ym, p->z, p->y, g->z, p->y);
             }
         }else if(isF(g)){
             printf("F\n");

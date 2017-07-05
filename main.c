@@ -24,6 +24,11 @@ int main(int argv, char *argc[]){
     if(argv == 3){
         exec = atoi(argc[2]);
     }
+    printf("exec %d\n", exec);
+    int tool = 1;
+    if(argv == 4){
+        tool = atoi(argc[3]);
+    }
     printf("Program name %s\n", argc[0]);
     printf("File name %s\n", argc[1]);
     gc_list * gl = create_list();
@@ -48,11 +53,17 @@ int main(int argv, char *argc[]){
         return 1;  
     }   
     read_cnc(c);
-    c->type_of_work = LASER;
+    if(tool == LASER){
+        c->type_of_work = LASER;
+    }else{
+        c->type_of_work = FRESA;
+    }
     //print_motor(c->xm);
     //c->xm = get_motor(x_axis);
     //print_motor(c->xm);
+    mover_zero_cnc(c); 
     if(exec == 1){
+        /*
         ponto p;
         p.x = 0; p.z = 0; p.y = 0;
         printf("Starting trabalho: \n");
@@ -68,6 +79,7 @@ int main(int argv, char *argc[]){
                 executar(c, it->elem, NULL, &p);
             }  
         }
+        */
     }
     setdown_cnc(c);
     free(c);

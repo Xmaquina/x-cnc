@@ -40,6 +40,6 @@ char * type_saxis(sensor *s);
 int print_sensor(sensor *s);
 int read_conf_sensor(sensor *s, int sensor);
 int setup_sensor(sensor *s);
-
+int isAcative(sensor *s);
 
 #endif

@@ -74,5 +74,9 @@ printf("filename %s\n", filename);
 
 }
 
+int isAcative(sensor *s){
+    if(s->state == 0) return 1;
+    return 0;
+}
 
 
