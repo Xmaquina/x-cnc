@@ -65,6 +65,26 @@ int main(int argv, char *argc[]){
     //print_motor(c->xm);
     mover_zero_cnc(c); 
     if(exec == 1){
+        FORWARD(c->xm);
+        for(int i = 0; i < 48559; i++){
+            MOVE(c->xm);
+            #ifdef RASP_OS
+            delay(DELAY_TIME);
+            #endif
+        }
+        int zvoltas = 6613;
+        if(tool == 0){
+            zvoltas = 6613;
+        }else if(tool == 1){
+            zvoltas = 9396;
+        }
+        FORWARD(c->zm);
+        for(int i = 0; i < zvoltas; i++){
+            MOVE(c->zm);
+            #ifdef RASP_OS
+            delay(DELAY_TIME);
+            #endif
+        }
         ponto p;
         p.x = 0; p.z = 0; p.y = 0;
         printf("Starting trabalho: \n");

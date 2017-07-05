@@ -68,7 +68,7 @@ def get_type_from_subject(subject):
 def save_file():
     text = read_mails("xmaquinaxmaquina@gmail.com", "x1maquina2")
     print("Len: ", len(text))
-    diretorio = os.path.join("/home/gustavo/Documents/x-cnc", "arquivos")
+    diretorio = os.path.join("/home/pi/x-cnc", "arquivos")
     print("Diretorio existe:",diretorio, os.path.exists(diretorio))
     files_names = []
     i = 0

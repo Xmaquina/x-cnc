@@ -37,7 +37,7 @@ int mover_para_ponto_zero(motor *m){
     int i = 0;
     while(1){
         SREAD(s);
-        printf("%d\n", SREAD(s));
+//        printf("%d\n", SREAD(s));
         if(SACTIVE(s)){
           break;
         }
@@ -47,7 +47,7 @@ int mover_para_ponto_zero(motor *m){
         delay(DELAY_TIME);
         #endif
     }
-    printf("Voltas:%d ", i);
+    printf("Voltas:%d\n ", i);
     setup_step(m, m->set_step);
     return 1;
 }
@@ -68,19 +68,19 @@ int mover_zero_cnc(cnc *c){
         if(!SACTIVE(c->ym->s)){
             MOVE(c->ym);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
         if(!SACTIVE(c->zm->s)){
             MOVE(c->zm);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
         if(!SACTIVE(c->xm->s)){
             MOVE(c->xm);
             #ifdef RASP_OS 
-            delay(1);
+            delay(DELAY_TIME);
             #endif
         }
     }

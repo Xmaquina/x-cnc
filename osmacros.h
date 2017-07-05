@@ -6,5 +6,5 @@
 #define DRIVER_COMPRADO 1 
 #define VOLTAS_X 100
 #define VOLTAS_Y 40
-#define VOLTAS_Z 30
+#define VOLTAS_Z 15
 #endif

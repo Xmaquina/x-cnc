@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "../motor/motor.h"
-#include "../sensor/sensor.h"
+#include "../tools/motor.h"
+#include "../tools/sensor.h"
 #include <string.h>
 #include "../osmacros.h"
 #include "movimento.h"
@@ -15,7 +15,7 @@ int main(int argv, char *argc[]){
     motor *m, *m1;
     alloc_motor(&m);
     alloc_motor(&m1);
-    read_conf(m, Y_AXIS);
+    read_conf(m, Z_AXIS);
     //read_conf(m1, Y_AXIS);
     if(m == NULL){
         printf("You have to allocated it\n");
